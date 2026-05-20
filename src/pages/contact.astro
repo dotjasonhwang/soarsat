@@ -1,0 +1,72 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import ContactUs from '~/components/widgets/Contact.astro';
+import Features from '~/components/widgets/Features.astro';
+import EmbeddedMap from '~/components/widgets/EmbeddedMap.astro';
+import { BUSINESS } from 'astrowind:config';
+
+const metadata = {
+  title: 'Contact',
+  description: 'TODO: Add page description',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- HeroText Widget ******************* -->
+
+  <HeroText tagline="Contact" title="Let's Connect!" />
+
+  <ContactUs
+    id="form"
+    name="contact"
+    title="Drop us a message today!"
+    subtitle="For quicker answers, explore our FAQs section. You may find the solution you're looking for right there! If not, our support team is delighted to help you."
+    inputs={[
+      {
+        type: 'text',
+        name: 'name',
+        label: 'Name',
+      },
+      {
+        type: 'email',
+        name: 'email',
+        label: 'Email',
+      },
+    ]}
+    textarea={{
+      label: 'Message',
+    }}
+    disclaimer={{
+      label:
+        'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
+    }}
+    description="Our support team typically responds within 24 business hours."
+  />
+
+  <!-- Features2 Widget ************** -->
+
+  <Features
+    variant="vertical"
+    title="We are here to help!"
+    items={[
+      {
+        title: 'Phone',
+        description: BUSINESS.phone?.formatted || BUSINESS.phone?.tel || '',
+        icon: 'lucide:headphones',
+      },
+      {
+        title: 'Email',
+        description: BUSINESS.email || '',
+        icon: 'lucide:mail',
+      },
+      {
+        title: 'Location',
+        description: BUSINESS.location?.address || '',
+        icon: 'lucide:map-pin',
+      },
+    ]}
+  />
+
+  <EmbeddedMap />
+</Layout>

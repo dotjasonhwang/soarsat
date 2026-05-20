@@ -1,0 +1,27 @@
+---
+import { Icon } from 'astro-icon/components';
+
+import { UI } from 'astrowind:config';
+
+export interface Props {
+  label?: string;
+  class?: string;
+  iconClass?: string;
+}
+
+const {
+  label = 'Toggle between Dark and Light mode',
+  class:
+    className = 'text-muted hover:bg-toggle-theme rounded-lg text-sm p-2.5 inline-flex cursor-pointer items-center transition-slow',
+  iconClass = 'w-6 h-6',
+} = Astro.props;
+---
+
+{
+  !(UI.theme && UI.theme.endsWith(':only')) && (
+    <button type="button" class={className} aria-label={label} data-aw-toggle-color-scheme>
+      <Icon name="lucide:moon" class={`${iconClass} inline-block dark:hidden`} />
+      <Icon name="lucide:sun" class={`${iconClass} hidden dark:inline-block`} />
+    </button>
+  )
+}

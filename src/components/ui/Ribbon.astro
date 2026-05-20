@@ -1,0 +1,17 @@
+---
+export interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<div
+  class="absolute right-[-5px] 2xl:right-[-8px] top-[-5px] 2xl:top-[-10px] z-1 h-[100px] w-[100px] overflow-hidden text-right"
+>
+  <span
+    class="absolute top-[19px] right-[-21px] block w-full rotate-45 bg-accent text-surface text-center text-[10px] font-bold uppercase leading-5 shadow-lg before:absolute before:left-0 before:top-full before:z-[-1] before:border-[3px] before:border-r-transparent before:border-b-transparent before:border-l-accent/80 before:border-t-accent/80 before:content-[''] after:absolute after:right-0 after:top-full after:z-[-1] after:border-[3px] after:border-l-transparent after:border-b-transparent after:border-r-accent/80 after:border-t-accent/80 after:content-['']"
+  >
+    {title}
+  </span>
+</div>

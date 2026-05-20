@@ -1,0 +1,43 @@
+---
+import type { ItemGrid as Props } from '~/types';
+import { twMerge } from 'tailwind-merge';
+import Button from './Button.astro';
+import { Icon } from 'astro-icon/components';
+
+const { items = [], columns, defaultIcon = '', classes = {} } = Astro.props;
+
+const { icon: defaultIconClass = 'w-7 h-7 mr-2 text-primary' } = classes;
+---
+
+{
+  items && items.length > 0 && (
+    <div
+      class={`grid mx-auto gap-8 md:gap-y-12 mt-8 md:mt-12 ${
+        columns === 4
+          ? 'lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2'
+          : columns === 3
+            ? 'lg:grid-cols-3 sm:grid-cols-2'
+            : columns === 2
+              ? 'sm:grid-cols-2 '
+              : ''
+      }`}
+    >
+      {items.map(({ title, description, icon, callToAction }) => (
+        <div class="animate-on-scroll">
+          <div class="flex flex-col gap-2">
+            <div class="flex justify-start">
+              {(icon || defaultIcon) && (
+                <Icon name={icon || defaultIcon} class={twMerge('w-7 h-7 mr-2', defaultIconClass)} />
+              )}
+            </div>
+            {title && <h3>{title}</h3>}
+            <div>
+              {description && <p class="text-muted" set:html={description} />}
+              {callToAction && <Button variant="link" {...callToAction} />}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}

@@ -1,0 +1,210 @@
+---
+import { Icon } from 'astro-icon/components';
+import Logo from '~/components/Logo.astro';
+import ToggleTheme from '~/components/common/ToggleTheme.astro';
+import ToggleMenu from '~/components/common/ToggleMenu.astro';
+import Button from '~/components/ui/Button.astro';
+
+import { getHomePermalink } from '~/utils/permalinks';
+import { trimSlash } from '~/utils/permalinks';
+import type { CallToAction } from '~/types';
+
+interface Link {
+  text?: string;
+  href?: string;
+  ariaLabel?: string;
+  icon?: string;
+}
+
+interface MenuLink extends Link {
+  links?: Array<MenuLink>;
+}
+
+export interface Props {
+  id?: string;
+  links?: Array<MenuLink>;
+  actions?: Array<CallToAction>;
+  isSticky?: boolean;
+  isFullWidth?: boolean;
+  showToggleTheme?: boolean;
+  position?: 'left' | 'center' | 'right';
+}
+
+const {
+  id = 'header',
+  links = [],
+  actions = [],
+  isSticky = false,
+  isFullWidth = false,
+  showToggleTheme = false,
+  position = 'center',
+} = Astro.props;
+
+const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
+---
+
+<header
+  class:list={[
+    { sticky: isSticky, relative: !isSticky },
+    'top-0 z-40 flex-none mx-auto w-full border-b border-gray-50/0 transition-slow',
+  ]}
+  {...isSticky ? { 'data-aw-sticky-header': true } : {}}
+  {...id ? { id } : {}}
+>
+  <div class="absolute inset-0"></div>
+  <div
+    class:list={[
+      'relative py-3 px-4 md:px-6 mx-auto w-full',
+      'flex flex-col',
+      {
+        'md:flex md:justify-between': position !== 'center',
+      },
+      {
+        'md:grid md:grid-cols-3 md:items-center': position === 'center',
+      },
+      {
+        'max-w-7xl': !isFullWidth,
+      },
+    ]}
+  >
+    <div class:list={[{ 'mr-auto': position === 'right' }, 'flex justify-between order-0 md:order-none']}>
+      <a class="flex items-center" href={getHomePermalink()} aria-label="Go to homepage">
+        <Logo />
+      </a>
+      <div class="flex items-center md:hidden">
+        <ToggleMenu />
+      </div>
+    </div>
+    <nav
+      class="items-center w-full md:w-auto hidden md:flex md:mx-5 text-default overflow-y-auto overflow-x-hidden md:overflow-y-visible md:overflow-x-auto md:justify-self-center order-2 md:order-none"
+      aria-label="Main navigation"
+    >
+      <ul
+        class="flex flex-col md:flex-row md:self-center w-full md:w-auto text-xl md:text-base tracking-[0.01rem] font-medium md:justify-center"
+      >
+        {
+          links.map(({ text, href, links }) => (
+            <li class={links?.length ? 'dropdown' : ''}>
+              {links?.length ? (
+                <>
+                  <button
+                    type="button"
+                    class="px-4 py-3 flex items-center whitespace-nowrap"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    {text} <Icon name="lucide:chevron-down" class="w-3.5 h-3.5 ml-0.5 hidden md:inline" />
+                  </button>
+                  <ul class="dropdown-menu bg-background md:bg-background/90 md:backdrop-blur-md md:rounded-sm md:absolute pl-4 md:pl-0 md:hidden font-medium md:min-w-[200px] md:drop-shadow-xl">
+                    {links.map(({ text: text2, href: href2 }) => (
+                      <li>
+                        <a
+                          class:list={[
+                            'first:rounded-t last:rounded-b hover:bg-surface-elevated py-2 px-5 block whitespace-no-wrap',
+                            { 'aw-link-active': href2 === currentPath },
+                          ]}
+                          href={href2}
+                        >
+                          {text2}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : (
+                <a
+                  class:list={[
+                    'px-4 py-3 flex items-center whitespace-nowrap',
+                    { 'aw-link-active': href === currentPath },
+                  ]}
+                  href={href}
+                >
+                  {text}
+                </a>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <nav
+      class:list={[
+        { 'ml-auto': position === 'left' },
+        'hidden md:self-center md:flex items-center w-full md:w-auto justify-end p-3 md:p-0 md:justify-self-end',
+        'order-1 md:order-none',
+      ]}
+      aria-label="Header actions"
+    >
+      <div class="items-center flex justify-between w-full md:w-auto">
+        <div class="flex">
+          {showToggleTheme && <ToggleTheme iconClass="w-5 h-5" />}
+        </div>
+        {
+          actions?.length && (
+            <span class="ml-4">
+              {actions.map((btnProps) => (
+                <Button variant="primary" {...btnProps} class="ml-2 py-2.5 px-4 md:px-6 font-semibold text-sm w-auto" />
+              ))}
+            </span>
+          )
+        }
+      </div>
+    </nav>
+  </div>
+</header>
+
+<style>
+  :root {
+    --header-height: 70px;
+  }
+
+  /* Header scroll styles */
+  header.scroll > div:first-child {
+    background-color: var(--background);
+    border-bottom-width: 1px;
+    border-color: var(--header-scroll-border);
+  }
+
+  /* Desktop-specific styles */
+  @media (min-width: 768px) {
+    header.scroll > div:first-child {
+      background-color: var(--header-scroll-bg);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0.375rem 1.5rem 0 rgb(140 152 164 / 13%);
+    }
+
+    :global(.dark) header.scroll > div:first-child {
+      box-shadow: none;
+    }
+  }
+
+  /* Header expanded navigation */
+  header.expanded nav[aria-label='Main navigation'] {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0 5px;
+    padding-top: var(--header-height); /* Space for action buttons */
+    will-change: transform; /* Better animation performance on mobile */
+  }
+
+  /* Position action buttons at top of expanded menu */
+  header.expanded nav[aria-label='Header actions'] {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background-color: var(--background);
+    border-bottom: 1px solid var(--color-primary);
+  }
+
+  /* Dropdown menu */
+  :global(.dropdown:focus .dropdown-menu),
+  :global(.dropdown:focus-within .dropdown-menu),
+  :global(.dropdown:hover .dropdown-menu) {
+    display: block;
+  }
+</style>

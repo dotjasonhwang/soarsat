@@ -1,0 +1,112 @@
+---
+import { BUSINESS } from 'astrowind:config';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+
+const { id, bg = await Astro.slots.render('bg') } = Astro.props;
+
+const location = BUSINESS?.location;
+const zoom = 15;
+
+// Generate Google Maps embed URL (simple, no API key required)
+const getMapEmbedUrl = () => {
+  if (!location) return '';
+
+  // Use address for embedding (fast and reliable, no API key needed)
+  const query = location.address;
+  return `https://maps.google.com/maps?q=${encodeURIComponent(query)}&t=&z=${zoom}&ie=UTF8&iwloc=&output=embed`;
+};
+
+const embedUrl = getMapEmbedUrl();
+
+// Generate unique IDs for accessibility
+const mapId = id || 'embedded-map';
+const regionId = `${mapId}-region`;
+---
+
+<style>
+  /* Responsive height: 400px mobile, 800px desktop */
+  .map-container {
+    height: 400px;
+  }
+
+  @media (min-width: 768px) {
+    .map-container {
+      height: 800px;
+    }
+  }
+
+  /* Loading skeleton animation */
+  .map-skeleton {
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--color-muted) 10%, transparent) 25%,
+      color-mix(in srgb, var(--color-muted) 20%, transparent) 50%,
+      color-mix(in srgb, var(--color-muted) 10%, transparent) 75%
+    );
+    background-size: 200% 100%;
+    animation: skeleton 1.5s ease-in-out infinite;
+  }
+</style>
+
+<script>
+  // Handle iframe loading state
+  document.addEventListener('DOMContentLoaded', () => {
+    const mapIframes = document.querySelectorAll('.map-container iframe');
+
+    mapIframes.forEach((iframe) => {
+      const container = iframe.closest('.map-container');
+      const skeleton = container?.querySelector('.map-skeleton');
+
+      iframe.addEventListener('load', () => {
+        // Fade in iframe
+        iframe.classList.remove('opacity-0');
+        iframe.classList.add('opacity-100');
+
+        // Hide skeleton
+        if (skeleton instanceof HTMLElement) {
+          skeleton.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+{
+  location && (
+    <WidgetWrapper id={mapId} bg={bg}>
+      <div
+        class="map-container relative overflow-hidden rounded-lg shadow-lg focus-within:outline-2 focus-within:outline-primary focus-within:outline-offset-2"
+        role="region"
+        aria-label={`Interactive map showing ${BUSINESS.name} at ${location.address}`}
+        id={regionId}
+      >
+        {/* Loading skeleton - visible until iframe loads */}
+        <div class="map-skeleton absolute inset-0 flex items-center justify-center" aria-hidden="true">
+          <div class="text-muted text-sm">Loading map...</div>
+        </div>
+
+        <iframe
+          src={embedUrl}
+          width="100%"
+          height="100%"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title={`Interactive map showing ${BUSINESS.name} location at ${location.address}`}
+          aria-describedby={`${mapId}-address`}
+          tabindex="0"
+          class="w-full h-full opacity-0 transition-regular"
+        />
+      </div>
+    </WidgetWrapper>
+  )
+}
+
+{
+  !location && (
+    <div class="text-center p-8 text-muted" role="alert" aria-live="polite">
+      <p>Location information not configured. Please add location details to your config.yaml file.</p>
+    </div>
+  )
+}

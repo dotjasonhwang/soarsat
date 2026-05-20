@@ -1,0 +1,51 @@
+{
+    "recommendations": [
+        "astro-build.astro-vscode",
+        "bradlc.vscode-tailwindcss",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "unifiedjs.vscode-mdx",
+        "github.vscode-github-actions",
+        "gitlens",
+
+        //// CODE QUALITY & FORMATTING
+        // Prettier: Opinionated code formatting (JS, CSS, HTML, JSON).
+        "esbenp.prettier-vscode",
+        // ESLint: Standard for finding and fixing problems in JavaScript/TypeScript.
+        "dbaeumer.vscode-eslint",
+
+        // Code Spell Checker: Catches spelling errors in code, comments, and docs.
+        "streetsidesoftware.code-spell-checker",
+
+        //// PRODUCTIVITY & WORKFLOW
+        // Live Server: Launches a local dev server with live reload capability.
+        // "ritwickdey.LiveServer",
+
+        // GitLens: Supercharges Git integration with powerful inline annotations.
+        "eamodio.gitlens",
+
+        // Auto Rename Tag: Automatically renames paired HTML/XML tags.
+        "formulahendry.auto-rename-tag",
+
+        // Path IntelliSense: Autocompletes filenames.
+        "chrisbolin.path-intellisense",
+
+        //// FRAMEWORK & LANGUAGE HELPERS
+
+        // CSS Peek: Allows you to peek at CSS styles from your HTML/JSX.
+        "pranaygp.vscode-css-peek",
+
+        // Tailwind CSS IntelliSense: Provides advanced features for Tailwind CSS development.
+        "bradlc.vscode-tailwindcss",
+
+        // JavaScript (ES6) Snippets: Useful shortcuts for common JS/TS/React patterns.
+        "xabikos.javascriptsnippets",
+
+        // REST Client: Send HTTP requests and view responses directly in VS Code.
+        "humao.rest-client",
+
+        // AI CODING ASSISTANTS (Recommended, but may require paid subscription)
+        
+    ],
+    "unwantedRecommendations": []
+}

@@ -1,0 +1,40 @@
+---
+import FormContainer from '~/components/ui/Form.astro';
+import Headline from '~/components/ui/Headline.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import type { Contact as Props } from '~/types';
+
+const {
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  tagline = await Astro.slots.render('tagline'),
+  inputs,
+  textarea,
+  disclaimer,
+  button,
+  description,
+  name,
+
+  id,
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+---
+
+<WidgetWrapper id={id} bg={bg}>
+  <Headline title={title} subtitle={subtitle} tagline={tagline} />
+
+  {
+    inputs && (
+      <div class="mt-8 md:mt-12 flex flex-col max-w-xl mx-auto rounded-lg backdrop-blur-sm bg-background shadow-sm p-4 sm:p-6 lg:p-8 w-full border border-foreground">
+        <FormContainer
+          inputs={inputs}
+          textarea={textarea}
+          disclaimer={disclaimer}
+          button={button}
+          description={description}
+          name={name}
+        />
+      </div>
+    )
+  }
+</WidgetWrapper>

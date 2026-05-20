@@ -1,0 +1,255 @@
+/* ╔════════════════════════════════════════════════════════════════════════════╗
+   ║  BRAND COLORS & FONTS                                                       ║
+   ║  This is the second file to edit for each new client.                       ║
+   ║  For business info, see: src/config.yaml                                    ║
+   ╚════════════════════════════════════════════════════════════════════════════╝ */
+
+/* Font imports MUST come before Tailwind CSS import */
+@import '@fontsource-variable/inter';
+
+@import 'tailwindcss';
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   BRAND COLORS (update these for each client)
+   ─────────────────────────────────────────────────────────────────────────────
+   Tip: Use https://www.figma.com/color-contrast-checker/ to verify contrast
+*/
+
+/* Light mode */
+:root {
+  /* BRAND COLORS - Change these ↓ */
+  --primary: rgb(1 97 239); /* Main brand color - buttons, links, accents */
+  --primary-hover: rgb(1 70 175); /* Darker shade for hover states */
+  --secondary: rgb(0 70 175); /* Secondary brand color */
+  --accent: #5521b5; /* Accent for highlights, badges */
+
+  /* NEUTRAL COLORS - Usually fine as-is ↓ */
+  --background: white;
+  --foreground: #101010;
+  --muted: #595959;
+  --surface: rgb(243, 248, 255);
+  --surface-elevated: rgb(246, 250, 255);
+  --on-primary: white; /* Text color on primary backgrounds */
+  --placeholder: #6b7280;
+  --header-scroll-bg: rgba(255, 255, 255, 0.9);
+  --header-scroll-border: transparent;
+}
+
+/* Dark mode */
+.dark {
+  /* BRAND COLORS - Change these ↓ */
+  --primary: #0161ef; /* Can be same or slightly lighter than light mode */
+  --primary-hover: rgb(51, 132, 231); /* Lighter shade for dark mode hover */
+  --secondary: rgb(191 219 254);
+  --accent: #ad78ff;
+
+  /* NEUTRAL COLORS - Usually fine as-is ↓ */
+  --background: #030620;
+  --foreground: #e5ecf6;
+  --muted: rgba(229, 236, 246, 0.75);
+  --surface: #030620;
+  --surface-elevated: #374151;
+  --on-primary: white;
+  --placeholder: #6b7280;
+  --header-scroll-bg: rgba(3, 6, 33, 0.9);
+  --header-scroll-border: rgba(107, 114, 128, 0.2);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   EVERYTHING BELOW THIS LINE IS SYSTEM CONFIG (don't edit unless customizing)
+   ─────────────────────────────────────────────────────────────────────────────
+*/
+
+/* ===========================
+   TAILWIND V4 THEME CONFIGURATION
+   ===========================
+   Using @theme inline to resolve CSS variables at runtime (not build time)
+   This allows :root and .dark variables to be properly referenced
+*/
+@theme {
+  /* Semantic color tokens */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-on-primary: var(--on-primary);
+  --color-placeholder: var(--placeholder);
+
+  /* Font families - Tailwind v4 CSS-first configuration */
+  --font-family-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-family-serif: 'Inter Variable', ui-serif, serif;
+  --font-family-heading: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ===========================
+   TAILWIND V4 VARIANTS & PLUGINS
+   ===========================
+*/
+@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant intersect (&:not([no-intersect]));
+
+@plugin '@tailwindcss/typography';
+
+/* Animation keyframes */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes skeleton {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@layer base {
+  /* Base typography - Building on Tailwind Preflight reset */
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    @apply text-base;
+  }
+
+  /* Semantic heading hierarchy - Responsive by default */
+  h1 {
+    @apply text-4xl md:text-5xl font-bold font-sans leading-tight tracking-tighter;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl font-bold font-sans leading-tight tracking-tighter;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl font-semibold font-sans leading-tight;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl font-semibold font-sans;
+  }
+
+  h5 {
+    @apply text-lg md:text-xl font-semibold font-sans;
+  }
+
+  h6 {
+    @apply text-base md:text-lg font-semibold font-sans;
+  }
+
+  /* Body text */
+  p {
+    @apply text-base leading-relaxed;
+  }
+
+  /* Small text (captions, metadata) */
+  small {
+    @apply text-sm;
+  }
+
+  /* Text selection styles */
+  ::selection {
+    background-color: lavender;
+  }
+
+  .dark ::selection {
+    background-color: black;
+    color: snow;
+  }
+}
+
+/* ===========================
+   SEMANTIC UTILITY CLASSES
+   ===========================
+*/
+
+/* Typography utilities - Semantic names for special cases */
+@utility text-display {
+  /* Hero headlines - Extra large, responsive */
+  @apply text-5xl md:text-6xl lg:text-7xl font-bold font-sans leading-tight tracking-tighter;
+}
+
+@utility text-title {
+  /* Page titles - Large, responsive */
+  @apply text-4xl md:text-5xl font-bold font-sans leading-tight tracking-tighter;
+}
+
+@utility text-body-lg {
+  /* Lead paragraphs, subtitles - Larger body text */
+  @apply text-lg md:text-xl leading-relaxed;
+}
+
+@utility text-small {
+  /* Metadata, captions - Small text */
+  @apply text-sm;
+}
+
+/* Transition utilities - 3 semantic speeds for micro-interactions */
+@utility transition-fast {
+  transition: all 100ms ease-out;
+}
+
+@utility transition-regular {
+  transition: all 200ms ease-out;
+}
+
+@utility transition-slow {
+  transition: all 400ms ease-in-out;
+}
+
+/* Animation utilities - 3 simple classes for all animations */
+@utility animate-immediate {
+  @media (prefers-reduced-motion: no-preference) {
+    @media (min-width: 768px) {
+      animation: fadeInUp 1s both;
+    }
+  }
+}
+
+@utility animate-on-scroll {
+  @media (min-width: 768px) {
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @media (min-width: 768px) {
+      &[data-visible] {
+        animation: fadeInUp 1s both;
+        opacity: 1;
+      }
+    }
+  }
+}
+
+/* NOTE: animate-together has identical CSS to animate-on-scroll above.
+   The difference is in JavaScript behavior (see BasicScripts.astro):
+   - animate-on-scroll: Applies stagger delays between sibling elements
+   - animate-together: All elements animate simultaneously (no stagger) */
+@utility animate-together {
+  @media (min-width: 768px) {
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @media (min-width: 768px) {
+      &[data-visible] {
+        animation: fadeInUp 1s both;
+        opacity: 1;
+      }
+    }
+  }
+}

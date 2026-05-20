@@ -1,0 +1,230 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import heroImage from '~/assets/images/hero-image.png';
+import Hero from '~/components/widgets/Hero.astro';
+import Note from '~/components/widgets/Note.astro';
+import Features from '~/components/widgets/Features.astro';
+import Content from '~/components/widgets/Content.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Your Business Name — Professional Services & Solutions',
+  description: 'TODO: Add page description',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero Widget ******************* -->
+
+  <Hero
+    actions={[
+      {
+        variant: 'primary',
+        text: 'get started',
+        href: '/contact',
+        icon: 'lucide:arrow-right',
+      },
+      { text: 'our services', href: '/services' },
+    ]}
+    image={{ src: heroImage, alt: 'Floating abstract astronaut' }}
+  >
+    <Fragment slot="title">
+      Professional <span class="text-accent">Business Solutions</span> for Your Success
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      <span class="hidden sm:inline">
+        We deliver <span class="font-semibold">exceptional results</span> through innovative strategies and expert execution.</span
+      >
+      <span class="block mt-1 sm:hidden font-bold text-primary">Results-driven solutions.</span>
+      Helping businesses grow with custom services, proven methodologies, and dedicated support tailored to your unique needs.
+    </Fragment>
+  </Hero>
+
+  <!-- Note Widget ******************* -->
+
+  <Note title="Philosophy:" description="Simplicity, Best Practices and High Performance" />
+
+  <!-- Features Widget *************** -->
+
+  <Features
+    id="services"
+    tagline="Our Services"
+    title="What We Offer"
+    subtitle="Professional services designed to help your business thrive in today's competitive marketplace."
+    items={[
+      {
+        title: 'Service 1',
+        description: 'Talk about the service with keywords people will be searching for it by. Keep it 1-2 sentences.',
+        icon: 'lucide:settings',
+      },
+      {
+        title: 'Service 2',
+        description: 'Talk about the service with keywords people will be searching for it by. Keep it 1-2 sentences.',
+        icon: 'lucide:lightbulb',
+      },
+      {
+        title: 'Service 3',
+        description: 'Talk about the service with keywords people will be searching for it by. Keep it 1-2 sentences.',
+        icon: 'lucide:rocket',
+      },
+    ]}
+  />
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    isReversed
+    tagline="About Us"
+    title="About Company Title"
+    items={[
+      {
+        title: 'Expert Team',
+        description:
+          'Our experienced professionals bring years of industry knowledge and proven track records to every project.',
+      },
+      {
+        title: 'Quality Results',
+        description:
+          'We deliver exceptional outcomes through attention to detail, rigorous processes, and commitment to excellence.',
+      },
+      {
+        title: 'Client-Focused Approach',
+        description:
+          'Your success is our priority. We work closely with you to understand your needs and exceed expectations.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Our Team',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="mt-2">Building lasting partnerships</h3>
+      We believe in creating long-term relationships with our clients through trust, transparency, and exceptional service
+      delivery.
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-surface"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Portfolio/Projects Preview ******* -->
+
+  <Features
+    variant="vertical"
+    title="Our Portfolio"
+    subtitle="See examples of our recent work and successful project deliveries"
+    tagline="Recent Projects"
+    items={[
+      {
+        title: 'Project Type 1',
+        description: 'Brief description of this type of project and the value it brings to clients.',
+        icon: 'lucide:image',
+      },
+      {
+        title: 'Project Type 2',
+        description: 'Brief description of this type of project and the value it brings to clients.',
+        icon: 'lucide:file-text',
+      },
+      {
+        title: 'Project Type 3',
+        description: 'Brief description of this type of project and the value it brings to clients.',
+        icon: 'lucide:check-circle',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-surface"></div>
+    </Fragment>
+  </Features>
+
+  <!-- HighlightedPosts Widget ******* -->
+
+  <BlogLatestPosts
+    title="Insights & Industry News"
+    information={`Stay updated with the latest industry trends, best practices, and insights from our experts. 
+                        Our blog features case studies, tips, and thought leadership to help your business stay ahead of the curve.
+                `}
+  />
+
+  <!-- FAQs Widget ******************* -->
+
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Get answers to common questions about our services, process, and how we can help your business succeed."
+    tagline="FAQs"
+    items={[
+      {
+        title: 'How do you approach new projects?',
+        description:
+          'We start with a thorough discovery phase to understand your business goals, target audience, and specific requirements. This allows us to create a customized strategy that delivers measurable results.',
+      },
+      {
+        title: 'What is your typical project timeline?',
+        description:
+          'Project timelines vary based on scope and complexity. Most projects take 2-8 weeks from start to finish. We provide detailed timelines during our initial consultation and keep you updated throughout the process.',
+      },
+      {
+        title: 'Do you provide ongoing support?',
+        description:
+          'Yes, we offer various support packages to ensure your project continues to perform optimally. This includes maintenance, updates, monitoring, and technical support as needed.',
+      },
+      {
+        title: 'What makes your services different?',
+        description:
+          'We combine industry expertise with a personalized approach. Our team stays current with the latest trends and technologies while focusing on delivering solutions that drive real business results.',
+      },
+      {
+        title: 'How do you measure project success?',
+        description:
+          'Success is measured against the specific goals we establish together during the planning phase. This typically includes metrics like performance improvements, user engagement, conversion rates, and ROI.',
+      },
+      {
+        title: 'Can you work with our existing team?',
+        description:
+          'Absolutely. We collaborate seamlessly with internal teams and other vendors. Our flexible approach allows us to integrate with your existing processes and provide support where needed most.',
+      },
+    ]}
+  />
+
+  <!-- Stats Widget ****************** -->
+
+  <Stats
+    stats={[
+      { title: 'Completed Projects', amount: '150+' },
+      { title: 'Happy Clients', amount: '95%' },
+      { title: 'Years Experience', amount: '10+' },
+      { title: 'Team Members', amount: '25+' },
+    ]}
+  />
+
+  <!-- CallToAction Widget *********** -->
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'get started today',
+        href: '/contact',
+        target: '_self',
+        icon: 'lucide:arrow-right',
+      },
+    ]}
+  >
+    <Fragment slot="title">
+      Ready to Transform <br class="block sm:hidden" /><span class="sm:whitespace-nowrap">Your Business?</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Join hundreds of satisfied clients who have achieved their goals with our expert services. <br
+        class="hidden md:inline"
+      />Contact us today for a free consultation.
+    </Fragment>
+  </CallToAction>
+</Layout>

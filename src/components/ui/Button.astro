@@ -1,0 +1,49 @@
+---
+import { Icon } from 'astro-icon/components';
+import { twMerge } from 'tailwind-merge';
+import type { CallToAction as Props } from '~/types';
+
+const {
+  variant = 'secondary',
+  target,
+  text = Astro.slots.render('default'),
+  icon = '',
+  class: className = '',
+  type,
+  ...rest
+} = Astro.props;
+
+// Base button styles - shared across all variants except 'link'
+const baseStyles =
+  'inline-flex items-center justify-center rounded-full font-medium text-center text-base leading-snug transition-regular py-3.5 px-6 focus:ring-primary focus:ring-offset-background focus:ring-2 focus:ring-offset-2 cursor-pointer uppercase';
+
+// Variant-specific styles composed with base
+const variants = {
+  primary: `${baseStyles} font-semibold bg-primary text-on-primary border-primary border hover:bg-primary-hover hover:border-primary-hover`,
+  secondary: `${baseStyles} border-primary border bg-transparent text-foreground hover:bg-surface-elevated hover:border-muted`,
+  tertiary: `${baseStyles} bg-transparent text-muted hover:text-foreground border-none shadow-none`,
+  link: 'cursor-pointer text-muted hover:text-primary',
+};
+---
+
+{
+  type ? (
+    <button
+      type={type}
+      class={twMerge('grid grid-flow-col auto-cols-max items-center gap-1', variants[variant], className)}
+      {...rest}
+    >
+      <Fragment set:html={text} />
+      {icon && <Icon name={icon} class="w-5 h-5" />}
+    </button>
+  ) : (
+    <a
+      class={twMerge('grid grid-flow-col auto-cols-max items-center gap-1', variants[variant], className)}
+      {...(target ? { target: target, rel: 'noopener noreferrer' } : {})}
+      {...rest}
+    >
+      <Fragment set:html={text} />
+      {icon && <Icon name={icon} class="w-5 h-5" />}
+    </a>
+  )
+}

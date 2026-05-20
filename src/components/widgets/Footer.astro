@@ -1,0 +1,99 @@
+---
+import { Icon } from 'astro-icon/components';
+import { SITE } from 'astrowind:config';
+import { getHomePermalink } from '~/utils/permalinks';
+import ROKLink from '../ui/ROKLink.astro';
+
+interface Link {
+  text?: string;
+  href?: string;
+  ariaLabel?: string;
+  icon?: string;
+}
+
+interface Links {
+  title?: string;
+  links: Array<Link>;
+}
+
+export interface Props {
+  links: Array<Links>;
+  secondaryLinks: Array<Link>;
+  socialLinks: Array<Link>;
+  footNote?: string;
+  theme?: string;
+}
+
+const { socialLinks = [], secondaryLinks = [], links = [], footNote = '' } = Astro.props;
+---
+
+<footer class:list={['relative not-prose']}>
+  <div class="bg-surface absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="grid grid-cols-12 gap-4 gap-y-8 sm:gap-8 py-8 md:py-12">
+      <div class="col-span-12 lg:col-span-4">
+        <div class="mt-2">
+          <a class="inline-block font-bold text-xl" href={getHomePermalink()}>{SITE?.name}</a>
+        </div>
+        <div class="text-sm text-muted flex gap-1">
+          {
+            secondaryLinks.map(({ text, href }, index) => (
+              <>
+                {index !== 0 ? ' · ' : ''}
+                <a class="text-muted hover:underline transition-fast" href={href} set:html={text} />
+              </>
+            ))
+          }
+        </div>
+      </div>
+      {
+        links.map(({ title, links }) => (
+          <div class="col-span-6 md:col-span-3 lg:col-span-2">
+            {/* use my  */}
+            <div class="font-medium my-2">{title}</div>
+            {links && Array.isArray(links) && links.length > 0 && (
+              <ul class="text-sm flex flex-col gap-2">
+                {links.map(({ text, href, ariaLabel }) => (
+                  <li>
+                    <a class="text-muted hover:underline transition-fast" href={href} aria-label={ariaLabel}>
+                      <Fragment set:html={text} />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        ))
+      }
+    </div>
+    <div class="md:flex md:items-center md:justify-between py-6 md:py-8">
+      {
+        socialLinks?.length ? (
+          <ul class="flex md:order-1 -ml-2 md:ml-4">
+            {socialLinks.map(({ ariaLabel, href, text, icon }) => (
+              <li>
+                <a
+                  class="text-muted hover:bg-surface-elevated focus:outline-hidden focus:ring-4 focus:ring-subtle rounded-lg text-sm p-2.5 inline-flex items-center"
+                  aria-label={ariaLabel}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {icon && <Icon name={icon} class="w-5 h-5" />}
+                  <Fragment set:html={text} />
+                </a>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          ''
+        )
+      }
+
+      <div class="text-sm mr-4 text-muted">
+        <Fragment set:html={footNote} />
+        <ROKLink />
+      </div>
+    </div>
+  </div>
+</footer>

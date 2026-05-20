@@ -1,0 +1,229 @@
+---
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features from '~/components/widgets/Features.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
+import Layout from '~/layouts/PageLayout.astro';
+
+const metadata = {
+  title: 'Our Services',
+  description: 'TODO: Add page description',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero Widget ******************* -->
+
+  <Hero
+    tagline="Services"
+    title="Professional Services That Drive Results"
+    subtitle="Discover our comprehensive range of services designed to help your business grow, innovate, and succeed in today's competitive marketplace."
+    actions={[{ variant: 'primary', target: '_self', text: 'view all services', href: '#services' }]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
+      alt: 'Our Professional Services',
+    }}
+  />
+
+  <!-- Features2 Widget ************** -->
+
+  <Features
+    variant="vertical"
+    id="services"
+    title="Our Core Service Areas"
+    subtitle="We offer comprehensive services across multiple domains, each designed to deliver exceptional results for your business."
+    columns={3}
+    items={[
+      {
+        title: 'Web Development',
+        description:
+          'Custom websites and web applications built with modern technologies. From corporate sites to e-commerce platforms, we deliver responsive, fast, and user-friendly solutions.',
+        icon: 'lucide:globe',
+      },
+      {
+        title: 'Digital Marketing',
+        description:
+          'Comprehensive digital marketing campaigns that drive results. Including SEO optimization, social media strategy, and content marketing to boost your online presence.',
+        icon: 'lucide:line-chart',
+      },
+      {
+        title: 'Brand Identity',
+        description:
+          'Complete brand identity development from logo design to brand guidelines. We help businesses establish a strong, memorable visual identity that resonates with their audience.',
+        icon: 'lucide:palette',
+      },
+      {
+        title: 'E-commerce Solutions',
+        description:
+          'End-to-end e-commerce platforms with secure payment processing, inventory management, and optimized user experiences that convert visitors into customers.',
+        icon: 'lucide:shopping-cart',
+      },
+      {
+        title: 'Mobile Applications',
+        description:
+          'Native and cross-platform mobile apps designed for optimal performance and user engagement. From concept to app store deployment and ongoing support.',
+        icon: 'lucide:smartphone',
+      },
+      {
+        title: 'Data Analytics',
+        description:
+          'Custom analytics solutions and dashboards that transform raw data into actionable insights, helping businesses make informed decisions and track performance.',
+        icon: 'lucide:scatter-chart',
+      },
+      {
+        title: 'Cloud Infrastructure',
+        description:
+          'Scalable cloud solutions including migration, optimization, and management. Ensuring your systems are secure, reliable, and cost-effective.',
+        icon: 'lucide:cloud',
+      },
+      {
+        title: 'Consulting Services',
+        description:
+          'Strategic technology consulting to help businesses leverage digital solutions effectively. From architecture planning to implementation roadmaps.',
+        icon: 'lucide:lightbulb',
+      },
+      {
+        title: 'Automation Solutions',
+        description:
+          'Custom automation tools and workflows that streamline business processes, reduce manual work, and improve operational efficiency across your organization.',
+        icon: 'lucide:bot',
+      },
+    ]}
+  />
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    isReversed
+    items={[
+      {
+        title: 'Strategic Planning',
+        description:
+          'Every project begins with thorough research and strategic planning to ensure we deliver solutions that align with your business objectives and user needs.',
+        icon: 'lucide:target',
+      },
+      {
+        title: 'Modern Technologies',
+        description:
+          'We leverage cutting-edge technologies and industry best practices to build robust, scalable, and future-proof solutions for your business.',
+        icon: 'lucide:code',
+      },
+      {
+        title: 'User-Centered Design',
+        description:
+          'Our design process prioritizes user experience, creating intuitive interfaces that engage your audience and drive desired actions.',
+        icon: 'lucide:users',
+      },
+      {
+        title: 'Quality Assurance',
+        description:
+          'Rigorous testing and quality assurance processes ensure every project meets our high standards for performance, security, and reliability.',
+        icon: 'lucide:shield-check',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1525909002-1b05e0c869d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80',
+      alt: 'Our Approach',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="mt-2">Our Approach</h3>
+    </Fragment>
+  </Content>
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    isAfterContent
+    items={[
+      {
+        title: 'Faster Time to Market',
+        description:
+          'Our streamlined development process and agile methodology help you launch your projects faster while maintaining high quality standards.',
+        icon: 'lucide:clock',
+      },
+      {
+        title: 'Measurable Results',
+        description:
+          'We focus on delivering solutions that provide tangible business value, with clear metrics and KPIs to track success and ROI.',
+        icon: 'lucide:arrow-up-right',
+      },
+      {
+        title: 'Scalable Solutions',
+        description:
+          'Built with growth in mind, our solutions can adapt and scale with your business needs, ensuring long-term value and flexibility.',
+        icon: 'lucide:trending-up',
+      },
+      {
+        title: 'Ongoing Support',
+        description:
+          'Comprehensive post-launch support and maintenance ensure your projects continue to perform optimally and evolve with your needs.',
+        icon: 'lucide:headphones',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1552664688-cf412ec27db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
+      alt: 'Project Benefits',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="mt-2">Project Benefits</h3>
+    </Fragment>
+  </Content>
+
+  <!-- Testimonials Widget *********** -->
+
+  <Testimonials
+    title="Client Success Stories"
+    testimonials={[
+      {
+        testimonial: `Working with this team transformed our online presence completely. The new website not only looks amazing but has increased our conversion rates by 40%. Their attention to detail and understanding of our business goals was exceptional.`,
+        name: 'Emily Rodriguez',
+        job: 'CEO, TechStart Inc.',
+        image: {
+          src: 'https://images.unsplash.com/photo-1618835962148-cf177563c6c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=930&q=80',
+          alt: 'Emily Rodriguez',
+        },
+      },
+      {
+        testimonial: `The mobile app they developed for us has been a game-changer. User engagement increased by 200% and our customer satisfaction scores have never been higher. The project was delivered on time and within budget.`,
+        name: 'Michael Chen',
+        job: 'Product Manager, RetailPlus',
+        image: {
+          src: 'https://images.unsplash.com/photo-1561406636-b80293969660?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
+          alt: 'Michael Chen',
+        },
+      },
+      {
+        testimonial: `Their digital marketing strategy helped us reach new markets and increased our online sales by 150%. The team's expertise in SEO and social media marketing is outstanding. Highly recommended for any business looking to grow.`,
+        name: 'Sarah Thompson',
+        job: 'Marketing Director, GrowthCo',
+        image: {
+          src: 'https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=824&q=80',
+          alt: 'Sarah Thompson',
+        },
+      },
+    ]}
+    callToAction={{
+      target: '_self',
+      text: 'View more case studies',
+      href: '/reviews',
+      icon: 'lucide:chevron-right',
+    }}
+  />
+
+  <!-- CallToAction Widget *********** -->
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Start Your Project',
+        href: '/contact',
+      },
+    ]}
+    title="Ready to Bring Your Vision to Life?"
+    subtitle="Let's discuss your project requirements and create something amazing together. Contact us for a free consultation and project quote."
+  />
+</Layout>

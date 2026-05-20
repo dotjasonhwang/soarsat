@@ -1,0 +1,26 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import Button from '~/components/ui/Button.astro';
+import { getHomePermalink } from '~/utils/permalinks';
+
+const title = `Error 404`;
+const description = 'Page not found';
+---
+
+<Layout metadata={{ title, description }}>
+  <section class="flex items-center h-full pt-16">
+    <div class="container flex flex-col items-center justify-center px-5 mx-auto mt-12 md:mt-16">
+      <div class="max-w-md text-center">
+        <h1 class="mt-6 font-bold text-5xl">
+          <span class="sr-only">Error</span>
+          <span class="text-primary">404</span>
+        </h1>
+        <p class="mt-6 text-3xl font-semibold md:text-3xl">We couldn't find this page.</p>
+        <p class="mt-6 text-lg text-muted">
+          Don't worry, you can find plenty of other things on our homepage. Contact us if you need help.
+        </p>
+        <Button href={getHomePermalink()} class="mt-6">Back to homepage</Button>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,103 @@
+# ╔════════════════════════════════════════════════════════════════════════════╗
+# ║  CLIENT CONFIGURATION                                                       ║
+# ║  This is the main file to edit for each new client.                         ║
+# ║  For brand colors, see: src/assets/styles/tailwind.css                      ║
+# ╚════════════════════════════════════════════════════════════════════════════╝
+
+# ─────────────────────────────────────────────────────────────────────────────
+# BUSINESS INFO (update all of these)
+# ─────────────────────────────────────────────────────────────────────────────
+business:
+  name: 'Your Business Name'
+  email: 'hello@yourbusiness.com'
+  phone:
+    tel: '5551234567' # Numbers only, used for tel: links
+    formatted: '(555) 123-4567' # Display format
+  location:
+    address: '123 Main Street, San Francisco, CA 94102'
+    placeId: '' # Optional: Google Maps Place ID for embedded map
+  socialMedia:
+    twitter: 'https://twitter.com/yourbusiness'
+    instagram: 'https://instagram.com/yourbusiness'
+    facebook: 'https://facebook.com/yourbusiness'
+    linkedin: 'https://linkedin.com/company/yourbusiness'
+    github: '' # Leave blank if not applicable
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SITE SETTINGS (update these)
+# ─────────────────────────────────────────────────────────────────────────────
+site:
+  name: 'Your Business Name' # Should match business.name
+  site: 'https://yourdomain.com' # Production URL
+  base: '/'
+  trailingSlash: false
+  googleSiteVerificationId: '' # Optional: Google Search Console verification
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SCHEMA MARKUP (JSON-LD for rich search results)
+# ─────────────────────────────────────────────────────────────────────────────
+schema:
+  type: 'LocalBusiness' # Options: "LocalBusiness" | "Organization" | "Person" | null (disabled)
+  # For LocalBusiness subtypes, use: "Restaurant", "MedicalBusiness", "LegalService", etc.
+  # Full list: https://schema.org/LocalBusiness#subtypes
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SEO METADATA (update these)
+# ─────────────────────────────────────────────────────────────────────────────
+metadata:
+  title:
+    default: 'Your Business Name'
+    template: '%s — Your Business Name'
+  description: 'A brief description of your business for search engines (150-160 chars ideal)'
+  robots:
+    index: true
+    follow: true
+  openGraph:
+    site_name: 'Your Business Name'
+    images:
+      - url: '~/assets/images/default.png' # Replace with your OG image (1200x628)
+        width: 1200
+        height: 628
+    type: website
+  twitter:
+    handle: '@yourbusiness'
+    site: '@yourbusiness'
+    cardType: summary_large_image
+
+# ─────────────────────────────────────────────────────────────────────────────
+# OPTIONAL SETTINGS (usually fine as-is)
+# ─────────────────────────────────────────────────────────────────────────────
+analytics:
+  vendors:
+    googleTagManager:
+      id: null # Add your GTM container ID: "GTM-XXXXXXX"
+
+ui:
+  theme: 'system' # Options: "system" | "light" | "dark" | "light:only" | "dark:only"
+
+apps:
+  blog:
+    isEnabled: true
+    postsPerPage: 6
+    post:
+      isEnabled: true
+      permalink: '/%slug%'
+      robots:
+        index: true
+    list:
+      isEnabled: true
+      pathname: 'blog'
+      robots:
+        index: true
+    category:
+      isEnabled: true
+      pathname: 'category'
+      robots:
+        index: true
+    tag:
+      isEnabled: true
+      pathname: 'tag'
+      robots:
+        index: false
+    isRelatedPostsEnabled: true
+    relatedPostsCount: 4

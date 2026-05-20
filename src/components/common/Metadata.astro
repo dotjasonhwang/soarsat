@@ -1,0 +1,86 @@
+---
+import { SEO } from 'astro-seo';
+import type { Props as AstroSeoProps } from 'astro-seo';
+
+import { SITE, METADATA } from 'astrowind:config';
+import type { MetaData } from '~/types';
+import { getCanonical } from '~/utils/permalinks';
+import { getOpenGraphImage } from '~/utils/images';
+
+export interface Props extends MetaData {
+  dontUseTitleTemplate?: boolean;
+}
+
+const {
+  title,
+  ignoreTitleTemplate = false,
+  canonical = String(getCanonical(String(Astro.url.pathname))),
+  robots = {},
+  description,
+  openGraph = {},
+  twitter = {},
+} = Astro.props;
+
+// Get the first image from openGraph config or metadata
+const ogImageUrl = openGraph?.images?.[0]?.url || METADATA?.openGraph?.images?.[0]?.url;
+const processedImage = await getOpenGraphImage(ogImageUrl, Astro.site);
+
+// Build the final title
+const finalTitle = title || METADATA?.title?.default || SITE?.name || '';
+const titleTemplate = ignoreTitleTemplate ? '%s' : METADATA?.title?.template || '%s';
+
+// Build robots meta
+const noindex =
+  typeof robots?.index !== 'undefined'
+    ? !robots.index
+    : typeof METADATA?.robots?.index !== 'undefined'
+      ? !METADATA.robots.index
+      : true;
+const nofollow =
+  typeof robots?.follow !== 'undefined'
+    ? !robots.follow
+    : typeof METADATA?.robots?.follow !== 'undefined'
+      ? !METADATA.robots.follow
+      : true;
+
+// Build astro-seo props
+const seoProps: AstroSeoProps = {
+  title: finalTitle,
+  titleTemplate: titleTemplate,
+  titleDefault: METADATA?.title?.default,
+  description: description || METADATA?.description || '',
+  canonical: canonical,
+  noindex: noindex,
+  nofollow: nofollow,
+  openGraph: processedImage
+    ? {
+        basic: {
+          title: openGraph?.title || finalTitle,
+          type: (openGraph?.type as string) || 'website',
+          image: processedImage.url,
+          url: canonical,
+        },
+        optional: {
+          siteName: SITE?.name,
+          locale: 'en',
+          description: description || METADATA?.description,
+        },
+        image: {
+          width: processedImage.width,
+          height: processedImage.height,
+          alt: openGraph?.title || finalTitle,
+        },
+      }
+    : undefined,
+  twitter: {
+    card: processedImage ? 'summary_large_image' : 'summary',
+    site: twitter?.site || METADATA?.twitter?.site,
+    creator: twitter?.creator || METADATA?.twitter?.creator,
+    title: twitter?.title || openGraph?.title || finalTitle,
+    description: twitter?.description || description || METADATA?.description,
+    image: processedImage?.url,
+  },
+};
+---
+
+<SEO {...seoProps} />

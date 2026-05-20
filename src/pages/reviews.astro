@@ -1,0 +1,203 @@
+---
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Content from '~/components/widgets/Content.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
+import Layout from '~/layouts/PageLayout.astro';
+
+const metadata = {
+  title: 'Customer Reviews',
+  description: 'TODO: Add page description',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero Widget ******************* -->
+
+  <Hero
+    tagline="Reviews"
+    title="Trusted by Businesses Worldwide"
+    subtitle="Read what our clients say about their experience working with us. Real stories from real people who have achieved remarkable results."
+    actions={[{ variant: 'primary', target: '_self', text: 'Share Your Review', href: '#contact' }]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
+      alt: 'Customer Reviews and Testimonials',
+    }}
+  />
+
+  <!-- Stats Widget ****************** -->
+
+  <Stats
+    title="Our Track Record Speaks for Itself"
+    stats={[
+      { amount: '500+', title: 'Happy Clients', icon: 'lucide:users' },
+      { amount: '98%', title: 'Satisfaction Rate', icon: 'lucide:heart' },
+      { amount: '4.9/5', title: 'Average Rating', icon: 'lucide:star' },
+      { amount: '1,200+', title: 'Projects Delivered', icon: 'lucide:briefcase' },
+    ]}
+  />
+
+  <!-- Testimonials Widget *********** -->
+
+  <Testimonials
+    title="Featured Client Reviews"
+    subtitle="Discover how we've helped businesses transform their digital presence and achieve their goals."
+    testimonials={[
+      {
+        testimonial: `Working with this team transformed our online presence completely. The new website not only looks amazing but has increased our conversion rates by 40%. Their attention to detail and understanding of our business goals was exceptional.`,
+        name: 'Emily Rodriguez',
+        job: 'CEO, TechStart Inc.',
+        image: {
+          src: 'https://images.unsplash.com/photo-1618835962148-cf177563c6c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=930&q=80',
+          alt: 'Emily Rodriguez',
+        },
+      },
+      {
+        testimonial: `The mobile app they developed for us has been a game-changer. User engagement increased by 200% and our customer satisfaction scores have never been higher. The project was delivered on time and within budget.`,
+        name: 'Michael Chen',
+        job: 'Product Manager, RetailPlus',
+        image: {
+          src: 'https://images.unsplash.com/photo-1561406636-b80293969660?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
+          alt: 'Michael Chen',
+        },
+      },
+      {
+        testimonial: `Their digital marketing strategy helped us reach new markets and increased our online sales by 150%. The team's expertise in SEO and social media marketing is outstanding. Highly recommended for any business looking to grow.`,
+        name: 'Sarah Thompson',
+        job: 'Marketing Director, GrowthCo',
+        image: {
+          src: 'https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=824&q=80',
+          alt: 'Sarah Thompson',
+        },
+      },
+      {
+        testimonial: `Outstanding work on our e-commerce platform. The team's technical expertise and proactive communication made the entire process smooth. Our online revenue has tripled since the launch. We couldn't be happier!`,
+        name: 'David Martinez',
+        job: 'Founder, ShopLocal',
+        image: {
+          src: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80',
+          alt: 'David Martinez',
+        },
+      },
+      {
+        testimonial: `They redesigned our brand identity from the ground up, and the results exceeded our expectations. The new look perfectly captures our company values and has significantly improved brand recognition in our market.`,
+        name: 'Jessica Park',
+        job: 'CMO, BrandWorks',
+        image: {
+          src: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=922&q=80',
+          alt: 'Jessica Park',
+        },
+      },
+      {
+        testimonial: `The cloud migration project they managed for us was flawless. We experienced zero downtime during the transition, and our infrastructure costs have decreased by 35% while improving performance. True professionals!`,
+        name: 'Robert Kim',
+        job: 'CTO, DataFlow Systems',
+        image: {
+          src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
+          alt: 'Robert Kim',
+        },
+      },
+    ]}
+  />
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    isReversed
+    items={[
+      {
+        title: 'Transparent Communication',
+        description:
+          'We believe in keeping our clients informed at every step. Regular updates, clear timelines, and open dialogue ensure you always know the status of your project.',
+        icon: 'lucide:message-square',
+      },
+      {
+        title: 'Quality First',
+        description:
+          'Every project undergoes rigorous quality assurance and testing. We never compromise on quality, ensuring solutions that perform reliably and exceed expectations.',
+        icon: 'lucide:shield-check',
+      },
+      {
+        title: 'Client-Centric Approach',
+        description:
+          'Your success is our success. We take time to understand your business, goals, and challenges to deliver solutions that truly make a difference.',
+        icon: 'lucide:handshake',
+      },
+      {
+        title: 'Long-Term Partnership',
+        description:
+          "Our relationship doesn't end at project delivery. We provide ongoing support, maintenance, and strategic guidance to ensure continued success.",
+        icon: 'lucide:users',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80',
+      alt: 'Why Clients Choose Us',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="mt-2">Why Clients Choose Us</h3>
+    </Fragment>
+  </Content>
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    isAfterContent
+    items={[
+      {
+        title: 'Industry Expertise',
+        description:
+          'Over a decade of experience across diverse industries, from startups to enterprise organizations, delivering solutions that drive measurable results.',
+        icon: 'lucide:award',
+      },
+      {
+        title: 'Proven Results',
+        description:
+          'A consistent track record of successful projects with measurable ROI. Our clients see real business impact from the solutions we deliver.',
+        icon: 'lucide:trending-up',
+      },
+      {
+        title: 'Cutting-Edge Technology',
+        description:
+          'We stay ahead of the curve with the latest technologies and methodologies, ensuring your solutions are modern, efficient, and future-proof.',
+        icon: 'lucide:rocket',
+      },
+      {
+        title: 'Dedicated Support',
+        description:
+          "A dedicated team that's always ready to help. Fast response times and proactive problem-solving ensure your systems run smoothly 24/7.",
+        icon: 'lucide:headphones',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80',
+      alt: 'What Sets Us Apart',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="mt-2">What Sets Us Apart</h3>
+    </Fragment>
+  </Content>
+
+  <!-- CallToAction Widget *********** -->
+
+  <CallToAction
+    id="contact"
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Start Your Project',
+        href: '/contact',
+      },
+      {
+        variant: 'secondary',
+        text: 'View Our Services',
+        href: '/services',
+      },
+    ]}
+    title="Ready to Join Our Success Stories?"
+    subtitle="Let's create something amazing together. Contact us today for a free consultation and discover how we can help your business grow."
+  />
+</Layout>

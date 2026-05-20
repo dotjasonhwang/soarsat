@@ -1,0 +1,55 @@
+name: Link Checker
+
+on:
+  push:
+    branches: [ main, tailwindv4 ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  link-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build site
+        run: npm run build
+
+      - name: Serve site
+        run: |
+          npm install -g serve
+          serve -s dist -p 3000 &
+          sleep 5
+
+      - name: Check links with lychee
+        uses: lycheeverse/lychee-action@v1
+        with:
+          # Check built site and source files
+          args: |
+            --verbose
+            --no-progress
+            --exclude-mail
+            --exclude 'linkedin.com'
+            --exclude 'facebook.com'
+            --exclude 'twitter.com'
+            --exclude 'instagram.com'
+            --exclude 'example.com'
+            --exclude 'yourdomain.com'
+            --exclude 'yourbusiness'
+            --exclude 'localhost'
+            --exclude '127.0.0.1'
+            --timeout 30
+            http://localhost:3000
+            ./src/
+          fail: true
+          jobSummary: true

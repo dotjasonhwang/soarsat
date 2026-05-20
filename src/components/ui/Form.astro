@@ -1,0 +1,100 @@
+---
+import type { Form as Props } from '~/types';
+import Button from '~/components/ui/Button.astro';
+
+const { inputs, textarea, disclaimer, button = 'Contact us', description = '', name = 'contact' } = Astro.props;
+---
+
+<form name={name} method="POST" data-netlify="true" netlify-honeypot="bot-field">
+  <!-- Hidden form name field for Netlify -->
+  <input type="hidden" name="form-name" value={name} />
+
+  <!-- Honeypot field for spam protection (hidden from users) -->
+  <div class="hidden" aria-hidden="true">
+    <label>
+      Don't fill this out if you're human: <input name="bot-field" />
+    </label>
+  </div>
+  <div class="flex flex-col gap-4">
+    {
+      inputs &&
+        inputs.map(
+          ({ type = 'text', name, label = '', autocomplete = 'on', placeholder = '' }) =>
+            name && (
+              <div class="flex flex-col gap-2">
+                {label && (
+                  <label for={name} class="block text-sm font-medium text-foreground">
+                    {label}
+                  </label>
+                )}
+                <input
+                  type={type}
+                  name={name}
+                  id={name}
+                  autocomplete={autocomplete}
+                  placeholder={placeholder}
+                  class="py-3 px-4 block w-full text-base text-foreground rounded-lg border border-foreground "
+                />
+              </div>
+            )
+        )
+    }
+  </div>
+
+  <div class="flex flex-col gap-4">
+    {
+      textarea && (
+        <div class="flex flex-col gap-2">
+          <label for="textarea" class="block text-sm font-medium text-foreground mt-6">
+            {textarea.label}
+          </label>
+          <textarea
+            id="textarea"
+            name={textarea.name ? textarea.name : 'message'}
+            rows={textarea.rows ? textarea.rows : 4}
+            placeholder={textarea.placeholder}
+            class="py-3 px-4 block w-full text-base text-foreground rounded-lg border border-foreground "
+          />
+        </div>
+      )
+    }
+
+    {
+      disclaimer && (
+        <div class="flex items-start">
+          <div class="flex mt-0.5">
+            <input
+              id="disclaimer"
+              name="disclaimer"
+              type="checkbox"
+              class="cursor-pointer mt-1 py-3 px-4 block w-full text-base rounded-lg border border-foreground "
+            />
+          </div>
+          <div class="ml-3">
+            <label for="disclaimer" class="cursor-pointer select-none text-sm text-foreground">
+              {disclaimer.label}
+            </label>
+          </div>
+        </div>
+      )
+    }
+
+    {
+      button && (
+        <div class="flex justify-center">
+          <Button variant="primary" type="submit">
+            {button}
+          </Button>
+        </div>
+      )
+    }
+
+    {
+      description && (
+        <div class="text-center">
+          <p class="text-sm text-foreground">{description}</p>
+        </div>
+      )
+    }
+  </div>
+</form>

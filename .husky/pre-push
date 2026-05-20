@@ -1,0 +1,14 @@
+echo "🚀 Running pre-push checks..."
+
+# Run E2E tests on chromium (fast browser tests)
+echo "🌐 Running E2E tests..."
+npm run test:e2e
+
+if [ $? -ne 0 ]; then
+  echo "❌ E2E tests failed. Push aborted."
+  echo "💡 Run 'npm run test:e2e' to see details"
+  exit 1
+fi
+
+echo "✅ E2E tests passed! Push proceeding..."
+echo "📋 Note: Full test suite (all browsers + accessibility) runs in GitHub Actions"

@@ -1,0 +1,58 @@
+---
+import { SCHEMA, BUSINESS, SITE } from 'astrowind:config';
+
+const schemaType = SCHEMA?.type;
+
+// Skip if no schema type configured
+if (!schemaType) {
+  return;
+}
+
+// Parse address into structured format (basic parsing)
+const addressParts = BUSINESS.location?.address?.split(',').map((s: string) => s.trim()) || [];
+const streetAddress = addressParts[0] || '';
+const cityStateZip = addressParts.slice(1).join(', ');
+
+// Build the schema object based on type
+const buildSchema = () => {
+  const base = {
+    '@context': 'https://schema.org',
+    '@type': schemaType,
+    name: BUSINESS.name,
+    url: SITE.site,
+  };
+
+  // Add contact info if available
+  if (BUSINESS.email) {
+    (base as Record<string, unknown>).email = BUSINESS.email;
+  }
+  if (BUSINESS.phone?.tel) {
+    (base as Record<string, unknown>).telephone = `+1${BUSINESS.phone.tel}`;
+  }
+
+  // Add address for LocalBusiness and Organization
+  if (schemaType !== 'Person' && BUSINESS.location?.address) {
+    (base as Record<string, unknown>).address = {
+      '@type': 'PostalAddress',
+      streetAddress: streetAddress,
+      addressLocality: cityStateZip,
+    };
+  }
+
+  // Add social media links
+  const sameAs: string[] = [];
+  if (BUSINESS.socialMedia?.twitter) sameAs.push(BUSINESS.socialMedia.twitter);
+  if (BUSINESS.socialMedia?.instagram) sameAs.push(BUSINESS.socialMedia.instagram);
+  if (BUSINESS.socialMedia?.facebook) sameAs.push(BUSINESS.socialMedia.facebook);
+  if (BUSINESS.socialMedia?.linkedin) sameAs.push(BUSINESS.socialMedia.linkedin);
+  if (sameAs.length > 0) {
+    (base as Record<string, unknown>).sameAs = sameAs;
+  }
+
+  return base;
+};
+
+const schema = buildSchema();
+---
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(schema, null, 2)} />
