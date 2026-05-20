@@ -1,0 +1,110 @@
+---
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+
+interface ScoreEntry {
+  initials: string;
+  before: number;
+  after: number;
+}
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  tagline?: string;
+  scores?: ScoreEntry[];
+  id?: string;
+  bg?: string;
+}
+
+const { title = '', subtitle = '', tagline = '', scores = [], id, bg = await Astro.slots.render('bg') } = Astro.props;
+---
+
+<WidgetWrapper id={id} bg={bg}>
+  <Headline title={title} subtitle={subtitle} tagline={tagline} />
+
+  <div class="mt-8 md:mt-12" role="region" aria-label="Student SAT score improvements">
+    <!-- Accessible list for screen readers -->
+    <ul class="sr-only">
+      {
+        scores.map((score) => (
+          <li>
+            {score.initials}: improved from {score.before} to {score.after} (+{score.after - score.before} points)
+          </li>
+        ))
+      }
+    </ul>
+
+    <!-- Marquee track (duplicated for seamless loop) -->
+    <div class="marquee-container" aria-hidden="true">
+      <div class="flex gap-4 marquee-track">
+        {
+          [...scores, ...scores].map((score) => {
+            const improvement = score.after - score.before;
+            return (
+              <div class="flex-shrink-0 w-52 rounded-2xl bg-surface-elevated shadow-md border border-primary/10 p-6 text-center select-none">
+                <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary">
+                  {score.initials}
+                </div>
+
+                <div class="mb-4 flex items-center justify-center gap-3">
+                  <div class="text-center">
+                    <div class="mb-1 text-xs uppercase tracking-wide text-muted">Before</div>
+                    <div class="text-2xl font-semibold text-muted">{score.before}</div>
+                  </div>
+                  <div class="text-xl text-primary">→</div>
+                  <div class="text-center">
+                    <div class="mb-1 text-xs uppercase tracking-wide text-muted">After</div>
+                    <div class="text-2xl font-bold text-foreground">{score.after}</div>
+                  </div>
+                </div>
+
+                <div class="inline-flex items-center gap-1 rounded-full bg-green-100 px-3 py-1 text-sm font-bold text-green-700 dark:bg-green-900/30 dark:text-green-400">
+                  ↑ +{improvement} pts
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+  </div>
+</WidgetWrapper>
+
+<style>
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .marquee-container {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  }
+
+  .marquee-track {
+    width: max-content;
+    animation: marquee 40s linear infinite;
+  }
+
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-container {
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+    .marquee-track {
+      animation: none;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+</style>

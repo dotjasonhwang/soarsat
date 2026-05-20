@@ -1,20 +1,26 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-import heroImage from '~/assets/images/hero-image.png';
 import Hero from '~/components/widgets/Hero.astro';
-import Note from '~/components/widgets/Note.astro';
-import Features from '~/components/widgets/Features.astro';
+import Pricing from '~/components/widgets/Pricing.astro';
+import ScoreMarquee from '~/components/widgets/ScoreMarquee.astro';
 import Content from '~/components/widgets/Content.astro';
-import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
-import Stats from '~/components/widgets/Stats.astro';
+import headshot from '~/assets/images/headshot.png';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: 'Your Business Name — Professional Services & Solutions',
-  description: 'TODO: Add page description',
+  title: 'Soar SAT — SAT Tutoring by 1600-scorer Jason | Houston, TX & Online',
+  description:
+    'One-on-one SAT tutoring with proven results. Personalized strategies, flexible packages, and real score improvements for high school students.',
   ignoreTitleTemplate: true,
 };
+
+const scores = [
+  { initials: 'M. I.', before: 1120, after: 1320 },
+  { initials: 'J. H.', before: 1430, after: 1540 },
+  { initials: 'E. Z.', before: 1150, after: 1390 },
+  { initials: 'N. O.', before: 1210, after: 1320 },
+  { initials: 'H. K.', before: 1250, after: 1400 },
+];
 ---
 
 <Layout metadata={metadata}>
@@ -24,185 +30,190 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
-        text: 'get started',
-        href: '/contact',
-        icon: 'lucide:arrow-right',
+        text: 'Call Today',
+        href: 'tel:8329009422',
+        icon: 'lucide:phone',
       },
-      { text: 'our services', href: '/services' },
     ]}
-    image={{ src: heroImage, alt: 'Floating abstract astronaut' }}
   >
     <Fragment slot="title">
-      Professional <span class="text-accent">Business Solutions</span> for Your Success
+      Master the SAT <br />
+      <span class="text-accent"> Taught By Perfect Scorer</span>
     </Fragment>
 
     <Fragment slot="subtitle">
-      <span class="hidden sm:inline">
-        We deliver <span class="font-semibold">exceptional results</span> through innovative strategies and expert execution.</span
-      >
-      <span class="block mt-1 sm:hidden font-bold text-primary">Results-driven solutions.</span>
-      Helping businesses grow with custom services, proven methodologies, and dedicated support tailored to your unique needs.
+      Data-backed SAT tutoring to see sky-high improvements. Taught by Jason Hwang, a 1600-scorer educator of 10 years.
     </Fragment>
   </Hero>
 
-  <!-- Note Widget ******************* -->
+  <!-- Pricing Widget **************** -->
 
-  <Note title="Philosophy:" description="Simplicity, Best Practices and High Performance" />
-
-  <!-- Features Widget *************** -->
-
-  <Features
-    id="services"
-    tagline="Our Services"
-    title="What We Offer"
-    subtitle="Professional services designed to help your business thrive in today's competitive marketplace."
-    items={[
+  <Pricing
+    id="pricing"
+    tagline="Tutoring Packages"
+    title="Choose Your Path to a Higher Score"
+    subtitle="Transparent pricing and structured sessions."
+    prices={[
       {
-        title: 'Service 1',
-        description: 'Talk about the service with keywords people will be searching for it by. Keep it 1-2 sentences.',
-        icon: 'lucide:settings',
+        title: 'A La Carte',
+        subtitle: 'Maximum flexibility',
+        priceRemote: 125,
+        priceInPerson: 155,
+        period: 'per hour',
+        items: [{ description: 'Diagnostics Test & Report' }, { description: 'Flexible Session Scheduling' }],
+        callToAction: { text: 'Call Today', href: 'tel:8329009422' },
       },
       {
-        title: 'Service 2',
-        description: 'Talk about the service with keywords people will be searching for it by. Keep it 1-2 sentences.',
-        icon: 'lucide:lightbulb',
+        title: 'Standard',
+        subtitle: '12-hour package',
+        priceRemote: 900,
+        priceInPerson: 1125,
+        period: 'Total',
+        items: [
+          { description: 'Diagnostics Test & Report' },
+          { description: '12 hours of private tutoring' },
+          { description: 'Final Practice Test' },
+        ],
+        callToAction: { text: 'Call Today', href: 'tel:8329009422' },
       },
       {
-        title: 'Service 3',
-        description: 'Talk about the service with keywords people will be searching for it by. Keep it 1-2 sentences.',
-        icon: 'lucide:rocket',
+        title: 'Pro',
+        subtitle: '18-hour package',
+        priceRemote: 1170,
+        priceInPerson: 1460,
+        period: 'total',
+        items: [
+          { description: 'Diagnostics Test & Report' },
+          { description: '12 hours of private tutoring' },
+          { description: 'Final Practice Test' },
+        ],
+        callToAction: { text: 'Call Today', href: 'tel:8329009422' },
       },
     ]}
   />
 
-  <!-- Content Widget **************** -->
+  <!-- Score Marquee Widget ********** -->
 
-  <Content
-    isReversed
-    tagline="About Us"
-    title="About Company Title"
-    items={[
-      {
-        title: 'Expert Team',
-        description:
-          'Our experienced professionals bring years of industry knowledge and proven track records to every project.',
-      },
-      {
-        title: 'Quality Results',
-        description:
-          'We deliver exceptional outcomes through attention to detail, rigorous processes, and commitment to excellence.',
-      },
-      {
-        title: 'Client-Focused Approach',
-        description:
-          'Your success is our priority. We work closely with you to understand your needs and exceed expectations.',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Our Team',
-    }}
+  <ScoreMarquee
+    tagline="Student Results"
+    title="Real Students. Real Score Improvements."
+    subtitle="Official SAT scores from students who completed tutoring programs. Results vary by student and hours invested."
+    scores={scores}
   >
-    <Fragment slot="content">
-      <h3 class="mt-2">Building lasting partnerships</h3>
-      We believe in creating long-term relationships with our clients through trust, transparency, and exceptional service
-      delivery.
-    </Fragment>
-
     <Fragment slot="bg">
       <div class="absolute inset-0 bg-surface"></div>
+    </Fragment>
+  </ScoreMarquee>
+
+  <!-- About Widget ****************** -->
+
+  <Content
+    title="Meet Jason, Your Tutor"
+    isReversed
+    image={{ src: headshot, alt: 'Jason Hwang, SAT instructor' }}
+    items={[
+      {
+        title: '1600 Scorer',
+        description: 'The SAT changes regularly, I keep up by taking practice tests. Most recent 1600: April 2026.',
+      },
+      {
+        title: 'Rice Computer Science Graduate',
+        description: 'I use my technical background to teach the SAT with a proprietary data-driven approach.',
+      },
+      {
+        title: '10+ Years of Teaching Experience',
+        description: 'I was head TA at Rice University and have been teaching SAT and coding for over a decade.',
+      },
+    ]}
+  >
+    <Fragment slot="content">
+      Hi, my name is Jason Hwang. In my decade of educational experience, I've found that there are two key factors that
+      drive academic success: consistency, and targeted instruction. Consistency is key - regular practice and prep
+      beats cramming. Targeted instruction is how students can move past common mistakes and start getting higher
+      points. I use a proprietary software which analyzes focus areas for the different sections of the SAT and lets me
+      know which topics need extra help. This is how many students see 150+ improvements without having to cram hundreds
+      of hours of repetition.
     </Fragment>
   </Content>
 
-  <!-- Portfolio/Projects Preview ******* -->
-
+  <!-- Free SAT Resources Widget ***** -->
+  <!-- 
   <Features
-    variant="vertical"
-    title="Our Portfolio"
-    subtitle="See examples of our recent work and successful project deliveries"
-    tagline="Recent Projects"
+    id="resources"
+    tagline="Free SAT Resources"
+    title="Everything Parents & Students Need to Know"
+    subtitle="The SAT went fully digital in 2024. Here's what that means for your student — and how to get started for free."
     items={[
       {
-        title: 'Project Type 1',
-        description: 'Brief description of this type of project and the value it brings to clients.',
-        icon: 'lucide:image',
+        title: 'What Is the Digital SAT?',
+        description:
+          'The Digital SAT (dSAT) is shorter (2 hr 14 min), adaptive, and taken on a laptop or tablet. It tests Reading/Writing and Math with a max score of 1600.',
+        icon: 'lucide:monitor',
       },
       {
-        title: 'Project Type 2',
-        description: 'Brief description of this type of project and the value it brings to clients.',
-        icon: 'lucide:file-text',
+        title: 'How Adaptive Testing Works',
+        description:
+          "The dSAT adjusts difficulty in real time: your Module 1 performance determines Module 2's difficulty. First-module strategy is critical — and often overlooked.",
+        icon: 'lucide:git-branch',
       },
       {
-        title: 'Project Type 3',
-        description: 'Brief description of this type of project and the value it brings to clients.',
-        icon: 'lucide:check-circle',
+        title: 'When to Start Preparing',
+        description:
+          'Most students take the SAT junior year. Ideally start prep 3–6 months before test day. Sophomores can take a baseline practice test to set a starting score.',
+        icon: 'lucide:calendar',
+      },
+      {
+        title: 'Free Practice Tests (Bluebook)',
+        description:
+          'College Board offers 4 free full-length Digital SAT practice tests via the Bluebook app — the exact platform used on test day. No cost, no login needed.',
+        icon: 'lucide:book-open',
+      },
+      {
+        title: 'Khan Academy Official Prep',
+        description:
+          'Free personalized SAT practice on Khan Academy, built with College Board. Links to your PSAT scores to auto-generate a custom study plan.',
+        icon: 'lucide:graduation-cap',
+      },
+      {
+        title: 'Target Scores for Top Schools',
+        description:
+          'Competitive universities expect 1350+. Top 20 schools typically admit students scoring 1450–1580. Knowing your target changes how you prep.',
+        icon: 'lucide:trending-up',
+      },
+    ]}
+  /> -->
+
+  <!-- Testimonials Widget *********** -->
+  <!-- 
+  <Testimonials
+    id="reviews"
+    tagline="What Parents Say"
+    title="Trusted by Families Across [Location]"
+    testimonials={[
+      {
+        testimonial:
+          "[Placeholder — e.g., 'Our daughter went from a 1180 to a 1430 in 12 sessions. [Tutor Name] is patient, thorough, and genuinely invested in her success. Couldn't recommend more highly.']",
+        name: '[Parent Name]',
+        job: 'Parent of a [School Name] junior',
+      },
+      {
+        testimonial:
+          "[Placeholder — e.g., 'My son dreaded standardized tests. After working with [Tutor Name], he walked in confident. His score jumped 280 points and he's looking at schools we thought were out of reach.']",
+        name: '[Parent Name]',
+        job: 'Parent of a [School Name] senior',
+      },
+      {
+        testimonial:
+          "[Placeholder — e.g., 'Worth every penny. [Tutor Name] found exactly where my daughter was losing points and fixed it methodically. The improvement was dramatic — and fast.']",
+        name: '[Parent Name]',
+        job: 'Parent of a [School Name] junior',
       },
     ]}
   >
     <Fragment slot="bg">
       <div class="absolute inset-0 bg-surface"></div>
     </Fragment>
-  </Features>
-
-  <!-- HighlightedPosts Widget ******* -->
-
-  <BlogLatestPosts
-    title="Insights & Industry News"
-    information={`Stay updated with the latest industry trends, best practices, and insights from our experts. 
-                        Our blog features case studies, tips, and thought leadership to help your business stay ahead of the curve.
-                `}
-  />
-
-  <!-- FAQs Widget ******************* -->
-
-  <FAQs
-    title="Frequently Asked Questions"
-    subtitle="Get answers to common questions about our services, process, and how we can help your business succeed."
-    tagline="FAQs"
-    items={[
-      {
-        title: 'How do you approach new projects?',
-        description:
-          'We start with a thorough discovery phase to understand your business goals, target audience, and specific requirements. This allows us to create a customized strategy that delivers measurable results.',
-      },
-      {
-        title: 'What is your typical project timeline?',
-        description:
-          'Project timelines vary based on scope and complexity. Most projects take 2-8 weeks from start to finish. We provide detailed timelines during our initial consultation and keep you updated throughout the process.',
-      },
-      {
-        title: 'Do you provide ongoing support?',
-        description:
-          'Yes, we offer various support packages to ensure your project continues to perform optimally. This includes maintenance, updates, monitoring, and technical support as needed.',
-      },
-      {
-        title: 'What makes your services different?',
-        description:
-          'We combine industry expertise with a personalized approach. Our team stays current with the latest trends and technologies while focusing on delivering solutions that drive real business results.',
-      },
-      {
-        title: 'How do you measure project success?',
-        description:
-          'Success is measured against the specific goals we establish together during the planning phase. This typically includes metrics like performance improvements, user engagement, conversion rates, and ROI.',
-      },
-      {
-        title: 'Can you work with our existing team?',
-        description:
-          'Absolutely. We collaborate seamlessly with internal teams and other vendors. Our flexible approach allows us to integrate with your existing processes and provide support where needed most.',
-      },
-    ]}
-  />
-
-  <!-- Stats Widget ****************** -->
-
-  <Stats
-    stats={[
-      { title: 'Completed Projects', amount: '150+' },
-      { title: 'Happy Clients', amount: '95%' },
-      { title: 'Years Experience', amount: '10+' },
-      { title: 'Team Members', amount: '25+' },
-    ]}
-  />
+  </Testimonials> -->
 
   <!-- CallToAction Widget *********** -->
 
@@ -210,21 +221,13 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
-        text: 'get started today',
-        href: '/contact',
+        text: 'Call Jason Today',
+        href: 'tel:8329009422',
         target: '_self',
-        icon: 'lucide:arrow-right',
+        icon: 'lucide:phone',
       },
     ]}
   >
-    <Fragment slot="title">
-      Ready to Transform <br class="block sm:hidden" /><span class="sm:whitespace-nowrap">Your Business?</span>
-    </Fragment>
-
-    <Fragment slot="subtitle">
-      Join hundreds of satisfied clients who have achieved their goals with our expert services. <br
-        class="hidden md:inline"
-      />Contact us today for a free consultation.
-    </Fragment>
+    <Fragment slot="title"> Ready to Raise Your Score? </Fragment>
   </CallToAction>
 </Layout>

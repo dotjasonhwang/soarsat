@@ -1,8 +1,8 @@
 ---
 import { Icon } from 'astro-icon/components';
 import Button from '~/components/ui/Button.astro';
+import Badge from '~/components/ui/Badge.astro';
 import Headline from '~/components/ui/Headline.astro';
-import Ribbon from '~/components/ui/Ribbon.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import type { Pricing as Props } from '~/types';
 
@@ -11,68 +11,109 @@ const {
   subtitle = '',
   tagline = '',
   prices = [],
+  columns = 3,
 
   id,
   bg = await Astro.slots.render('bg'),
 } = Astro.props;
+
+const gridCols =
+  columns === 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : columns === 2 ? 'sm:grid-cols-2' : 'sm:grid-cols-2 lg:grid-cols-3';
 ---
 
 <WidgetWrapper id={id} bg={bg}>
   <Headline title={title} subtitle={subtitle} tagline={tagline} />
   <div class="flex items-stretch justify-center mt-8 md:mt-12">
-    <div class="grid grid-cols-3 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
+    <div class={`grid grid-cols-1 gap-4 w-full ${gridCols}`}>
       {
         prices &&
-          prices.map(({ title, subtitle, price, period, items, callToAction, hasRibbon = false, ribbonTitle }) => (
-            <div class="col-span-3 mx-auto flex w-full sm:col-span-1 md:col-span-1 lg:col-span-1 xl:col-span-1 animate-on-scroll">
-              {price && period && (
-                <div class="rounded-lg backdrop-blur-sm bg-surface-elevated shadow-sm px-6 py-8 flex w-full max-w-sm flex-col justify-between text-center">
-                  {hasRibbon && ribbonTitle && <Ribbon title={ribbonTitle} />}
-                  <div class="px-2">
-                    {title && (
-                      <h3 class="text-center text-xl font-semibold uppercase leading-6 tracking-wider mt-2">{title}</h3>
-                    )}
-                    {subtitle && <p class="font-light sm:text-lg text-muted">{subtitle}</p>}
-                    <div class="mt-16 md:mt-20">
-                      <div class="flex items-center justify-center text-center mt-1">
-                        <span class="text-5xl">$</span>
-                        <span class="text-6xl font-extrabold">{price}</span>
-                      </div>
-                      <span class="text-base leading-6 lowercase text-muted">{period}</span>
-                    </div>
-                    {items && (
-                      <ul class="mt-16 md:mt-20 space-y-2 text-left">
-                        {items.map(
-                          ({ description, icon }) =>
-                            description && (
-                              <li class="flex items-start space-x-3 leading-7">
-                                <div class="rounded-full bg-primary mt-1">
-                                  <Icon
-                                    name={icon ? icon : 'lucide:check'}
-                                    class="w-5 h-5 font-bold p-1 text-on-primary"
-                                  />
-                                </div>
-                                <span>{description}</span>
-                              </li>
-                            )
+          prices.map(
+            ({
+              title,
+              subtitle,
+              price,
+              priceRemote,
+              priceInPerson,
+              period,
+              items,
+              callToAction,
+              hasRibbon = false,
+              ribbonTitle,
+            }) => (
+              <div class="mx-auto flex w-full animate-on-scroll">
+                {(price || priceRemote || priceInPerson) && period && (
+                  <div class="relative rounded-lg backdrop-blur-sm bg-surface-elevated border border-primary/25 shadow-sm px-6 py-8 flex w-full flex-col justify-between text-center">
+                    {hasRibbon && ribbonTitle && <Badge title={ribbonTitle} />}
+                    <div class="px-2">
+                      {title && (
+                        <h3 class="text-center text-xl font-semibold uppercase leading-6 tracking-wider mt-2">
+                          {title}
+                        </h3>
+                      )}
+                      {subtitle && <p class="font-light sm:text-lg text-muted">{subtitle}</p>}
+                      <div class="mt-16 md:mt-20">
+                        {priceRemote !== undefined && priceInPerson !== undefined ? (
+                          <div class="flex items-stretch justify-center gap-3">
+                            <div class="flex flex-col items-center gap-1">
+                              <span class="text-xs font-semibold uppercase tracking-widest text-muted">Remote</span>
+                              <div class="flex items-center">
+                                <span class="text-3xl">$</span>
+                                <span class="text-4xl font-extrabold">{priceRemote}</span>
+                              </div>
+                            </div>
+                            <div class="w-px bg-primary/50 self-stretch" />
+                            <div class="flex flex-col items-center gap-1">
+                              <span class="text-xs font-semibold uppercase tracking-widest text-muted">In-Person</span>
+                              <div class="flex items-center">
+                                <span class="text-3xl">$</span>
+                                <span class="text-4xl font-extrabold">{priceInPerson}</span>
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          <div class="flex items-center justify-center text-center mt-1">
+                            <span class="text-5xl">$</span>
+                            <span class="text-6xl font-extrabold">{price}</span>
+                          </div>
                         )}
-                      </ul>
-                    )}
-                  </div>
-                  {callToAction && (
-                    <div class="flex justify-center mt-4 md:mt-6">
-                      {typeof callToAction === 'string' ? (
-                        <Fragment set:html={callToAction} />
-                      ) : (
-                        callToAction &&
-                        callToAction.href && <Button {...(hasRibbon ? { variant: 'primary' } : {})} {...callToAction} />
+                        <span class="block mt-3 text-base leading-6 lowercase text-muted">{period}</span>
+                      </div>
+                      {items && (
+                        <ul class="mt-16 md:mt-20 space-y-2 text-left">
+                          {items.map(
+                            ({ description, icon }) =>
+                              description && (
+                                <li class="flex items-start space-x-3 leading-7">
+                                  <div class="rounded-full bg-primary mt-1">
+                                    <Icon
+                                      name={icon ? icon : 'lucide:check'}
+                                      class="w-5 h-5 font-bold p-1 text-on-primary"
+                                    />
+                                  </div>
+                                  <span>{description}</span>
+                                </li>
+                              )
+                          )}
+                        </ul>
                       )}
                     </div>
-                  )}
-                </div>
-              )}
-            </div>
-          ))
+                    {callToAction && (
+                      <div class="flex justify-center mt-4 md:mt-6">
+                        {typeof callToAction === 'string' ? (
+                          <Fragment set:html={callToAction} />
+                        ) : (
+                          callToAction &&
+                          callToAction.href && (
+                            <Button {...(hasRibbon ? { variant: 'primary' } : {})} {...callToAction} />
+                          )
+                        )}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            )
+          )
       }
     </div>
   </div>

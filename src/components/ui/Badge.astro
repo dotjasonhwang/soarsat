@@ -1,0 +1,25 @@
+---
+export interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<div class="badge-wrap absolute right-4 top-0 z-10 w-12">
+  <div
+    class="badge-body bg-accent text-surface px-2 pt-3 pb-6 text-center text-[9px] font-bold uppercase leading-tight tracking-wide"
+  >
+    {title}
+  </div>
+</div>
+
+<style>
+  .badge-wrap {
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.22));
+  }
+
+  .badge-body {
+    clip-path: polygon(0 0, 100% 0, 100% 78%, 50% 100%, 0 78%);
+  }
+</style>

@@ -18,17 +18,17 @@
 /* Light mode */
 :root {
   /* BRAND COLORS - Change these ↓ */
-  --primary: rgb(1 97 239); /* Main brand color - buttons, links, accents */
-  --primary-hover: rgb(1 70 175); /* Darker shade for hover states */
-  --secondary: rgb(0 70 175); /* Secondary brand color */
-  --accent: #5521b5; /* Accent for highlights, badges */
+  --primary: #1d4ed8; /* Main brand color - buttons, links, accents */
+  --primary-hover: #1e40af; /* Darker shade for hover states */
+  --secondary: #3b82f6; /* Secondary brand color */
+  --accent: #16a34a; /* Accent for highlights, badges */
 
   /* NEUTRAL COLORS - Usually fine as-is ↓ */
-  --background: white;
-  --foreground: #101010;
-  --muted: #595959;
-  --surface: rgb(243, 248, 255);
-  --surface-elevated: rgb(246, 250, 255);
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --muted: #4b5563;
+  --surface: #f0f7ff;
+  --surface-elevated: #ffffff;
   --on-primary: white; /* Text color on primary backgrounds */
   --placeholder: #6b7280;
   --header-scroll-bg: rgba(255, 255, 255, 0.9);
@@ -38,20 +38,20 @@
 /* Dark mode */
 .dark {
   /* BRAND COLORS - Change these ↓ */
-  --primary: #0161ef; /* Can be same or slightly lighter than light mode */
-  --primary-hover: rgb(51, 132, 231); /* Lighter shade for dark mode hover */
-  --secondary: rgb(191 219 254);
-  --accent: #ad78ff;
+  --primary: #3b82f6; /* Lighter blue for legibility on dark backgrounds */
+  --primary-hover: #60a5fa; /* Even lighter on hover */
+  --secondary: #93c5fd;
+  --accent: #22c55e;
 
   /* NEUTRAL COLORS - Usually fine as-is ↓ */
-  --background: #030620;
-  --foreground: #e5ecf6;
-  --muted: rgba(229, 236, 246, 0.75);
-  --surface: #030620;
-  --surface-elevated: #374151;
+  --background: #0a0f1a;
+  --foreground: #f0f4ff;
+  --muted: rgba(240, 244, 255, 0.65);
+  --surface: #0a0f1a;
+  --surface-elevated: #1a2236;
   --on-primary: white;
   --placeholder: #6b7280;
-  --header-scroll-bg: rgba(3, 6, 33, 0.9);
+  --header-scroll-bg: rgba(10, 15, 26, 0.9);
   --header-scroll-border: rgba(107, 114, 128, 0.2);
 }
 

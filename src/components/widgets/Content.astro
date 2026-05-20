@@ -26,7 +26,7 @@ const {
 <WidgetWrapper id={id} containerClass={`${isAfterContent ? 'pt-0 md:pt-0 lg:pt-0' : ''}`} bg={bg}>
   <Headline title={title} subtitle={subtitle} tagline={tagline} />
   <div class="p-4 md:px-8 mt-8 md:mt-12">
-    <div class={`md:flex ${isReversed ? 'md:flex-row-reverse' : ''} md:gap-16`}>
+    <div class={`flex flex-col ${isReversed ? 'md:flex-row-reverse' : 'md:flex-row'} md:gap-16`}>
       <div class="md:basis-1/2">
         {content && <div class="text-lg text-foreground" set:html={content} />}
 
@@ -47,7 +47,7 @@ const {
           }}
         />
       </div>
-      <div aria-hidden="true" class="mt-10 md:mt-0 md:basis-1/2">
+      <div aria-hidden="true" class="order-first md:order-none mt-10 md:mt-0 md:basis-1/2">
         {
           image && (
             <div class="relative m-auto max-w-4xl">
@@ -57,7 +57,7 @@ const {
                 <Image
                   class="mx-auto w-full rounded-lg bg-placeholder shadow-lg"
                   width={500}
-                  height={500}
+                  height={620}
                   widths={[400, 768]}
                   sizes="(max-width: 768px) 100vw, 432px"
                   layout="responsive"

@@ -16,11 +16,11 @@ import { UI } from 'astrowind:config';
     );
   }
 
-  // Sync theme toggle switches to match current theme
+  // Sync theme toggle checkboxes: checked = dark mode (night), unchecked = light mode (day)
   const matches = document.querySelectorAll('[data-aw-toggle-color-scheme] > input');
   if (matches?.length) {
     matches.forEach((elem) => {
-      elem.checked = !document.documentElement.classList.contains('dark');
+      elem.checked = document.documentElement.classList.contains('dark');
     });
   }
 </script>

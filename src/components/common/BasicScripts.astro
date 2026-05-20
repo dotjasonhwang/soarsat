@@ -64,12 +64,24 @@ import { UI } from 'astrowind:config';
       document.querySelector('#header nav[aria-label="Header actions"]')?.classList.toggle('hidden');
     });
 
-    attachEvent('[data-aw-toggle-color-scheme]', 'click', function () {
+    attachEvent('[data-aw-toggle-color-scheme]', 'click', function (_, elem) {
       if (defaultTheme.endsWith(':only')) {
+        return;
+      }
+      // Checkbox toggles handle theme via their 'change' event below — skip here to avoid double-firing
+      if (elem.querySelector('input[type="checkbox"]')) {
         return;
       }
       document.documentElement.classList.toggle('dark');
       localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+    });
+
+    attachEvent('[data-aw-toggle-color-scheme] input[type="checkbox"]', 'change', function (_, elem) {
+      if (defaultTheme.endsWith(':only')) {
+        return;
+      }
+      document.documentElement.classList.toggle('dark', elem.checked);
+      localStorage.theme = elem.checked ? 'dark' : 'light';
     });
 
     attachEvent('[data-aw-social-share]', 'click', function (_, elem) {

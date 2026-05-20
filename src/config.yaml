@@ -8,27 +8,27 @@
 # BUSINESS INFO (update all of these)
 # ─────────────────────────────────────────────────────────────────────────────
 business:
-  name: 'Your Business Name'
-  email: 'hello@yourbusiness.com'
+  name: 'Soar SAT'
+  email: 'hello@aspirecodingacademy.com'
   phone:
-    tel: '5551234567' # Numbers only, used for tel: links
-    formatted: '(555) 123-4567' # Display format
+    tel: '8329009422' # Numbers only, used for tel: links
+    formatted: '(832) 900-9422' # Display format
   location:
-    address: '123 Main Street, San Francisco, CA 94102'
-    placeId: '' # Optional: Google Maps Place ID for embedded map
+    address: '800 W Sam Houston Pkwy S #130, Houston, TX 77042'
+    placeId: 'ChIJ16hEM4vDQIYRawe7R6bhE5c' # Optional: Google Maps Place ID for embedded map
   socialMedia:
-    twitter: 'https://twitter.com/yourbusiness'
-    instagram: 'https://instagram.com/yourbusiness'
-    facebook: 'https://facebook.com/yourbusiness'
-    linkedin: 'https://linkedin.com/company/yourbusiness'
+    twitter: ''
+    instagram: ''
+    facebook: ''
+    linkedin: ''
     github: '' # Leave blank if not applicable
 
 # ─────────────────────────────────────────────────────────────────────────────
 # SITE SETTINGS (update these)
 # ─────────────────────────────────────────────────────────────────────────────
 site:
-  name: 'Your Business Name' # Should match business.name
-  site: 'https://yourdomain.com' # Production URL
+  name: 'Soar SAT' # Should match business.name
+  site: 'https://soarsat.com' # Production URL
   base: '/'
   trailingSlash: false
   googleSiteVerificationId: '' # Optional: Google Search Console verification
@@ -46,22 +46,22 @@ schema:
 # ─────────────────────────────────────────────────────────────────────────────
 metadata:
   title:
-    default: 'Your Business Name'
-    template: '%s — Your Business Name'
+    default: 'Soar SAT'
+    template: '%s — Soar SAT'
   description: 'A brief description of your business for search engines (150-160 chars ideal)'
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: 'Your Business Name'
+    site_name: 'Soar SAT'
     images:
       - url: '~/assets/images/default.png' # Replace with your OG image (1200x628)
         width: 1200
         height: 628
     type: website
   twitter:
-    handle: '@yourbusiness'
-    site: '@yourbusiness'
+    handle: ''
+    site: ''
     cardType: summary_large_image
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -77,7 +77,7 @@ ui:
 
 apps:
   blog:
-    isEnabled: true
+    isEnabled: false
     postsPerPage: 6
     post:
       isEnabled: true
