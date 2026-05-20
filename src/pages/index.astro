@@ -37,12 +37,13 @@ const scores = [
     ]}
   >
     <Fragment slot="title">
-      Master the SAT <br />
-      <span class="text-accent"> Taught By Perfect Scorer</span>
+      Crush the SAT,<br />
+      <span class="text-accent"> Tutored by Perfect Scorer</span>
     </Fragment>
 
     <Fragment slot="subtitle">
-      Data-backed SAT tutoring to see sky-high improvements. Taught by Jason Hwang, a 1600-scorer educator of 10 years.
+      Data-backed SAT tutoring to see sky-high improvements. Taught by Jason Hwang, a 1600-scorer and educator of 10+
+      years.
     </Fragment>
   </Hero>
 
@@ -94,12 +95,7 @@ const scores = [
 
   <!-- Score Marquee Widget ********** -->
 
-  <ScoreMarquee
-    tagline="Student Results"
-    title="Real Students. Real Score Improvements."
-    subtitle="Official SAT scores from students who completed tutoring programs. Results vary by student and hours invested."
-    scores={scores}
-  >
+  <ScoreMarquee tagline="Student Results" title="Real Students. Real Score Improvements." scores={scores}>
     <Fragment slot="bg">
       <div class="absolute inset-0 bg-surface"></div>
     </Fragment>
