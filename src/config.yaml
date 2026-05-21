@@ -73,7 +73,7 @@ analytics:
       id: null # Add your GTM container ID: "GTM-XXXXXXX"
 
 ui:
-  theme: 'system' # Options: "system" | "light" | "dark" | "light:only" | "dark:only"
+  theme: 'light' # Options: "system" | "light" | "dark" | "light:only" | "dark:only"
 
 apps:
   blog:

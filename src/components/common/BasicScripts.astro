@@ -40,7 +40,15 @@ import { UI } from 'astrowind:config';
     }
   }
 
+  function syncToggleCheckbox() {
+    const checkbox = document.querySelector('[data-aw-toggle-color-scheme] input[type="checkbox"]');
+    if (checkbox) {
+      checkbox.checked = document.documentElement.classList.contains('dark');
+    }
+  }
+
   const onLoad = function () {
+    syncToggleCheckbox();
     let lastKnownScrollPosition = window.scrollY;
     let ticking = true;
 
@@ -169,6 +177,7 @@ import { UI } from 'astrowind:config';
 
   document.addEventListener('astro:after-swap', () => {
     initTheme();
+    syncToggleCheckbox();
     onLoad();
     onPageShow();
   });
