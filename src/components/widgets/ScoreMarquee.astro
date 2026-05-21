@@ -42,8 +42,8 @@ const { title = '', subtitle = '', tagline = '', scores = [], id, bg = await Ast
           [...scores, ...scores].map((score) => {
             const improvement = score.after - score.before;
             return (
-              <div class="flex-shrink-0 w-52 rounded-2xl bg-surface-elevated shadow-md border border-primary/10 p-6 text-center select-none">
-                <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary">
+              <div class="flex-shrink-0 w-52 rounded-2xl bg-surface-elevated border border-primary/80 p-6 text-center select-none">
+                <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-primary text-sm font-bold text-primary">
                   {score.initials}
                 </div>
 
@@ -60,7 +60,7 @@ const { title = '', subtitle = '', tagline = '', scores = [], id, bg = await Ast
                 </div>
 
                 <div class="inline-flex items-center gap-1 rounded-full bg-green-100 px-3 py-1 text-sm font-bold text-green-700 dark:bg-green-900/30 dark:text-green-400">
-                  ↑ +{improvement} pts
+                  ↑ {improvement} points
                 </div>
               </div>
             );

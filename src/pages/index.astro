@@ -6,6 +6,7 @@ import ScoreMarquee from '~/components/widgets/ScoreMarquee.astro';
 import Content from '~/components/widgets/Content.astro';
 import headshot from '~/assets/images/headshot.png';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import planeGraphic from '~/assets/images/plane_graphic.svg';
 
 const metadata = {
   title: 'Soar SAT — SAT Tutoring by 1600-scorer Jason | Houston, TX & Online',
@@ -46,6 +47,13 @@ const scores = [
       years.
     </Fragment>
   </Hero>
+
+  <img
+    src={planeGraphic.src}
+    alt=""
+    aria-hidden="true"
+    class="fixed bottom-[25%] right-[10%] w-48 md:w-96 opacity-40 z-0 pointer-events-none select-none"
+  />
 
   <!-- Pricing Widget **************** -->
 

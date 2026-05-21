@@ -5,7 +5,6 @@ import ToggleTheme from '~/components/common/ToggleTheme.astro';
 import ToggleMenu from '~/components/common/ToggleMenu.astro';
 import Button from '~/components/ui/Button.astro';
 
-import { getHomePermalink } from '~/utils/permalinks';
 import { trimSlash } from '~/utils/permalinks';
 import type { CallToAction } from '~/types';
 
@@ -51,7 +50,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
   {...isSticky ? { 'data-aw-sticky-header': true } : {}}
   {...id ? { id } : {}}
 >
-  <div class="absolute inset-0"></div>
+  <div class="absolute inset-0 bg-surface border-b border-primary/10"></div>
   <div
     class:list={[
       'relative py-3 px-4 md:px-6 mx-auto w-full',
@@ -68,9 +67,8 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
     ]}
   >
     <div class:list={[{ 'mr-auto': position === 'right' }, 'flex justify-between order-0 md:order-none']}>
-      <a class="flex items-center" href={getHomePermalink()} aria-label="Go to homepage">
-        <Logo />
-      </a>
+      <Logo />
+
       <div class="flex items-center md:hidden">
         <ToggleMenu />
       </div>
@@ -160,7 +158,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 
   /* Header scroll styles */
   header.scroll > div:first-child {
-    background-color: var(--background);
+    background-color: var(--surface);
     border-bottom-width: 1px;
     border-color: var(--header-scroll-border);
   }

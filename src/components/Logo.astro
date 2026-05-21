@@ -1,7 +1,9 @@
 ---
 import { SITE } from 'astrowind:config';
+import logo from '~/assets/logo/logo.svg';
+import { getHomePermalink } from '~/utils/permalinks';
 ---
 
-<span class="self-center text-xl font-bold">
-  {SITE?.name}
-</span>
+<a class="flex items-center py-1" href={getHomePermalink()}>
+  <img src={logo.src} alt={SITE.name} class="h-18 md:h-24 w-auto" />
+</a>

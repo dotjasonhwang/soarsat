@@ -31,7 +31,7 @@
   --surface-elevated: #ffffff;
   --on-primary: white; /* Text color on primary backgrounds */
   --placeholder: #6b7280;
-  --header-scroll-bg: rgba(255, 255, 255, 0.9);
+  --header-scroll-bg: rgba(240, 247, 255, 0.9);
   --header-scroll-border: transparent;
 }
 
@@ -47,11 +47,11 @@
   --background: #0a0f1a;
   --foreground: #f0f4ff;
   --muted: rgba(240, 244, 255, 0.65);
-  --surface: #0a0f1a;
+  --surface: #131d30;
   --surface-elevated: #1a2236;
   --on-primary: white;
   --placeholder: #6b7280;
-  --header-scroll-bg: rgba(10, 15, 26, 0.9);
+  --header-scroll-bg: rgba(19, 29, 48, 0.9);
   --header-scroll-border: rgba(107, 114, 128, 0.2);
 }
 
