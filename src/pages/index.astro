@@ -65,19 +65,18 @@ const scores = [
     prices={[
       {
         title: 'A La Carte',
-        subtitle: 'Maximum flexibility',
+        subtitle: 'For students who want maximum flexibilty.',
         priceRemote: 125,
         priceInPerson: 155,
-        period: 'per hour',
-        items: [{ description: 'Diagnostics Test & Report' }, { description: 'Flexible Session Scheduling' }],
+        items: [{ description: 'Customized Learning Plan' }, { description: 'Flexible Session Scheduling' }],
         callToAction: { text: 'Call Today', href: 'tel:8329009422' },
       },
       {
         title: 'Standard',
-        subtitle: '12-hour package',
+        subtitle: '12-hour package. Average students improve 100-150 points.',
         priceRemote: 900,
         priceInPerson: 1125,
-        period: 'Total',
+        hours: 12,
         items: [
           { description: 'Diagnostics Test & Report' },
           { description: '12 hours of private tutoring' },
@@ -87,10 +86,10 @@ const scores = [
       },
       {
         title: 'Pro',
-        subtitle: '18-hour package',
+        subtitle: '18-hour package. Average students improve 150-200 points.',
         priceRemote: 1170,
         priceInPerson: 1460,
-        period: 'total',
+        hours: 18,
         items: [
           { description: 'Diagnostics Test & Report' },
           { description: '12 hours of private tutoring' },

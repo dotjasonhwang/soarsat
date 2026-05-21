@@ -157,7 +157,7 @@ export interface Price {
   price?: number | string;
   priceRemote?: number | string;
   priceInPerson?: number | string;
-  period?: string;
+  hours?: number;
   items?: Array<Item>;
   callToAction?: CallToAction;
   hasRibbon?: boolean;
