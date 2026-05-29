@@ -171,7 +171,7 @@ export default function TestTimeline() {
 
       {/* SAT month cards (selection) */}
       <div className="mb-6">
-        <p className="text-base font-semibold text-foreground mb-3">Upcoming Test Dates</p>
+        <p className="text-lg font-semibold text-foreground mb-3">Click a Test Date</p>
         <div className="grid grid-cols-4 md:grid-cols-8 gap-2">
           {satCards.map((card) => {
             const isSelected =
@@ -208,13 +208,13 @@ export default function TestTimeline() {
           </h3>
           <p className="text-base text-muted leading-relaxed">
             {selectedTest.isPastSenior ? (
-              <>These dates are past the application window for students applying to college for {gradYear}.</>
+              <>This test is past the application window for students applying to college for {gradYear}.</>
             ) : currentGrade === 9 ? (
               <>This is very early for the SAT — most freshmen aren't ready yet.</>
             ) : firstPrepMonth ? (
-              <>Start prepping in <span className="font-semibold text-foreground">{firstPrepMonth.month} {firstPrepMonth.year}</span> for this test date.</>
+              <>Start prepping in <span className="font-semibold text-foreground">{firstPrepMonth.month} {firstPrepMonth.year}</span> for this test.</>
             ) : (
-              <>This is the next available test date.</>
+              <>This is the next available test.</>
             )}
           </p>
           {selectedTest.flair && !selectedTest.isPastSenior && (
