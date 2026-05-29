@@ -13,6 +13,8 @@ import astrowind from './vendor/integration';
 
 import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin, lazyImagesRehypePlugin } from './src/utils/frontmatter';
 
+import react from '@astrojs/react';
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
@@ -37,7 +39,6 @@ export default defineConfig({
         ],
       },
     }),
-
     compress({
       CSS: true,
       HTML: {
@@ -50,10 +51,10 @@ export default defineConfig({
       SVG: false,
       Logger: 1,
     }),
-
     astrowind({
       config: './src/config.yaml',
     }),
+    react(),
   ],
 
   image: {
@@ -66,7 +67,8 @@ export default defineConfig({
   },
 
   vite: {
-    plugins: [tailwindcss()],
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    plugins: [tailwindcss() as any],
     resolve: {
       alias: {
         '~': path.resolve(__dirname, './src'),

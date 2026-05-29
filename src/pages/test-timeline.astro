@@ -1,0 +1,22 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import SATTimeline from '~/components/widgets/SATTimeline.astro';
+
+const metadata = {
+  title: 'SAT Test Timeline — Soar SAT',
+  description:
+    'Find the best SAT test dates for your graduation year. Interactive school-year planner for 10th–12th grade students.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero>
+    <Fragment slot="title">When should you <br /><span class="text-accent">take the SAT?</span></Fragment>
+    <Fragment slot="subtitle"
+      >A simple grade-by-grade guide. Select your graduation year and get expert recommendations.</Fragment
+    >
+  </Hero>
+
+  <SATTimeline id="timeline" tagline="Plan Your SAT" title="SAT Test Date Planner" />
+</Layout>

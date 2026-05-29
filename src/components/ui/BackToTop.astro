@@ -1,0 +1,48 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<button
+  id="back-to-top"
+  aria-label="Back to top"
+  class="fixed bottom-24 right-12 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-primary text-on-primary shadow-lg opacity-0 pointer-events-none transition-opacity duration-300"
+>
+  <span class="bob">
+    <Icon name="lucide:chevron-up" class="w-5 h-5" />
+  </span>
+</button>
+
+<style>
+  @keyframes bob {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-4px);
+    }
+  }
+  .bob {
+    display: flex;
+    animation: bob 1.8s ease-in-out infinite;
+  }
+</style>
+
+<script>
+  const btn = document.getElementById('back-to-top');
+  if (btn) {
+    window.addEventListener(
+      'scroll',
+      () => {
+        const visible = window.scrollY > 200;
+        btn.style.opacity = visible ? '1' : '0';
+        btn.style.pointerEvents = visible ? 'auto' : 'none';
+      },
+      { passive: true }
+    );
+
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+</script>

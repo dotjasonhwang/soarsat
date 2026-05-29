@@ -1,6 +1,7 @@
 /// <reference types="vitest" />
 import { getViteConfig } from 'astro/config';
 
+ 
 export default getViteConfig({
   test: {
     globals: true,
@@ -30,4 +31,4 @@ export default getViteConfig({
       '**/*.e2e.{test,spec}.{js,ts}',
     ],
   },
-});
+} as Parameters<typeof getViteConfig>[0]);

@@ -10,6 +10,7 @@ import Analytics from '~/components/common/Analytics.astro';
 import Schema from '~/components/common/Schema.astro';
 import GoogleTagManagerNoScript from '~/components/common/GoogleTagManagerNoScript.astro';
 import BasicScripts from '~/components/common/BasicScripts.astro';
+import BackToTop from '~/components/ui/BackToTop.astro';
 
 // Comment the line below to disable View Transitions
 import { ClientRouter } from 'astro:transitions';
@@ -42,6 +43,7 @@ const { metadata } = Astro.props;
     <GoogleTagManagerNoScript />
     <slot />
 
+    <BackToTop />
     <BasicScripts />
   </body>
 </html>
