@@ -6,6 +6,10 @@ import ScoreMarquee from '~/components/widgets/ScoreMarquee.astro';
 import Content from '~/components/widgets/Content.astro';
 import headshot from '~/assets/images/headshot.png';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import Button from '~/components/ui/Button.astro';
+import { Icon } from 'astro-icon/components';
 import planeGraphic from '~/assets/images/plane_graphic.svg';
 
 const metadata = {
@@ -139,52 +143,35 @@ const scores = [
     </Fragment>
   </Content>
 
-  <!-- Free SAT Resources Widget ***** -->
-  <!-- 
-  <Features
-    id="resources"
-    tagline="Free SAT Resources"
-    title="Everything Parents & Students Need to Know"
-    subtitle="The SAT went fully digital in 2024. Here's what that means for your student — and how to get started for free."
-    items={[
-      {
-        title: 'What Is the Digital SAT?',
-        description:
-          'The Digital SAT (dSAT) is shorter (2 hr 14 min), adaptive, and taken on a laptop or tablet. It tests Reading/Writing and Math with a max score of 1600.',
-        icon: 'lucide:monitor',
-      },
-      {
-        title: 'How Adaptive Testing Works',
-        description:
-          "The dSAT adjusts difficulty in real time: your Module 1 performance determines Module 2's difficulty. First-module strategy is critical — and often overlooked.",
-        icon: 'lucide:git-branch',
-      },
-      {
-        title: 'When to Start Preparing',
-        description:
-          'Most students take the SAT junior year. Ideally start prep 3–6 months before test day. Sophomores can take a baseline practice test to set a starting score.',
-        icon: 'lucide:calendar',
-      },
-      {
-        title: 'Free Practice Tests (Bluebook)',
-        description:
-          'College Board offers 4 free full-length Digital SAT practice tests via the Bluebook app — the exact platform used on test day. No cost, no login needed.',
-        icon: 'lucide:book-open',
-      },
-      {
-        title: 'Khan Academy Official Prep',
-        description:
-          'Free personalized SAT practice on Khan Academy, built with College Board. Links to your PSAT scores to auto-generate a custom study plan.',
-        icon: 'lucide:graduation-cap',
-      },
-      {
-        title: 'Target Scores for Top Schools',
-        description:
-          'Competitive universities expect 1350+. Top 20 schools typically admit students scoring 1450–1580. Knowing your target changes how you prep.',
-        icon: 'lucide:trending-up',
-      },
-    ]}
-  /> -->
+  <!-- Free Resource: Test Timeline ** -->
+
+  <WidgetWrapper id="resources">
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-surface"></div>
+    </Fragment>
+    <Headline tagline="Free Tools" title="Plan Your SAT Journey" />
+    <div class="mt-8 md:mt-12 max-w-3xl mx-auto">
+      <div
+        class="flex flex-col sm:flex-row items-start gap-6 p-6 md:p-8 rounded-2xl bg-surface-elevated border border-primary/30 shadow-sm"
+      >
+        <div
+          class="flex-shrink-0 flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 text-primary"
+          aria-hidden="true"
+        >
+          <Icon name="lucide:calendar-clock" class="w-7 h-7" />
+        </div>
+        <div class="flex-1">
+          <div class="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-1">Interactive Tool</div>
+          <h3 class="text-xl md:text-2xl font-bold text-foreground mb-2">When Should I Take the SAT?</h3>
+          <p class="text-base text-muted leading-relaxed mb-4">
+            Find the best testing windows based on your graduation year and current grade — including key dates for
+            Early Decision and Regular Decision applications.
+          </p>
+          <Button variant="secondary" text="No Sign-Up Required" href="/tools/timeline" icon="lucide:arrow-right" />
+        </div>
+      </div>
+    </div>
+  </WidgetWrapper>
 
   <!-- Testimonials Widget *********** -->
   <!-- 
