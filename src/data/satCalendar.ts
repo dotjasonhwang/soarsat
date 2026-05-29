@@ -55,8 +55,10 @@ export const SCHOOL_YEAR_MONTHS: MonthData[] = [
     sat: true,
     psat: false,
     notes: {
-      grade11: 'Rising juniors trying to finish testing early.',
-      grade12: 'Rising seniors trying to boost scores before applications open.',
+      grade10:
+        'Most students find that performance for the SAT peaks in Junior & Senior year. Therefore, Sophomores can take the SAT with less pressure and get a head start in prep.',
+      grade11: 'This is a great test for students who have prepped over the summer.',
+      grade12: 'Key test date for Seniors who prepped over the summer and want to get their goal scores.',
     },
   },
   {
@@ -65,8 +67,10 @@ export const SCHOOL_YEAR_MONTHS: MonthData[] = [
     sat: true,
     psat: false,
     notes: {
-      grade11: "Very early in junior year — most students aren't ready yet.",
-      grade12: "Good early shot for seniors who didn't test over the summer.",
+      grade10:
+        'Most students find that performance for the SAT peaks in Junior & Senior year. Therefore, Sophomores can take the SAT with less pressure and get a head start in prep.',
+      grade11: 'This is a great test for students who have prepped over the summer.',
+      grade12: 'Key test date for Seniors who prepped over the summer and want to get their goal scores.',
     },
   },
   {
@@ -75,7 +79,10 @@ export const SCHOOL_YEAR_MONTHS: MonthData[] = [
     sat: true,
     psat: true,
     notes: {
-      grade11: 'PSAT/NMSQT is this month — most juniors prioritize it over the SAT.',
+      grade10:
+        'Most students find that performance for the SAT peaks in Junior & Senior year. Therefore, Sophomores can take the SAT with less pressure and get a head start in prep.',
+      grade11:
+        'Schools administer the PSAT this month. If you have the bandwidth, you can definitely take both the PSAT and the SAT this month.',
     },
   },
   {
@@ -84,8 +91,11 @@ export const SCHOOL_YEAR_MONTHS: MonthData[] = [
     sat: true,
     psat: false,
     notes: {
-      grade11: 'Early in the junior year curriculum for most students.',
-      grade12: 'Results arrive in time for Regular Decision.',
+      grade10:
+        'Most students find that performance for the SAT peaks in Junior & Senior year. Therefore, Sophomores can take the SAT with less pressure and get a head start in prep.',
+      grade11:
+        'Good test month, especially if you completed Algebra 2 in 10th grade or earlier. Otherwise, a few math concepts may be challenging for current Algebra 2 students.',
+      grade12: 'One of the last tests seniors can take before Regular Decision applications.',
     },
   },
   {
@@ -94,7 +104,10 @@ export const SCHOOL_YEAR_MONTHS: MonthData[] = [
     sat: true,
     psat: false,
     notes: {
-      grade11: 'Good starting point for highly prepared juniors.',
+      grade10:
+        'Most students find that performance for the SAT peaks in Junior & Senior year. Therefore, Sophomores can take the SAT with less pressure and get a head start in prep.',
+      grade11:
+        'Good test month, especially if you completed Algebra 2 in 10th grade or earlier. Otherwise, a few math concepts may be challenging for current Algebra 2 students.',
     },
   },
   {
@@ -117,8 +130,9 @@ export const SCHOOL_YEAR_MONTHS: MonthData[] = [
     sat: true,
     psat: false,
     notes: {
-      grade10: 'Only for advanced students tracking early.',
-      grade11: 'The premier spot for a first official attempt.',
+      grade10:
+        'Most students find that performance for the SAT peaks in Junior & Senior year. Therefore, Sophomores can take the SAT with less pressure and get a head start in prep.',
+      grade11: 'Prime testing window for Juniors, after finishing core concepts in school.',
     },
   },
   {
@@ -134,8 +148,9 @@ export const SCHOOL_YEAR_MONTHS: MonthData[] = [
     sat: true,
     psat: false,
     notes: {
-      grade10: 'Only for advanced students wanting an early jump.',
-      grade11: 'Prime spot for a first attempt or second retake.',
+      grade10:
+        'Most students find that performance for the SAT peaks in Junior & Senior year. Therefore, Sophomores can take the SAT with less pressure and get a head start in prep.',
+      grade11: 'Prime testing window for Juniors, after finishing core concepts in school.',
     },
   },
   {
@@ -144,7 +159,9 @@ export const SCHOOL_YEAR_MONTHS: MonthData[] = [
     sat: true,
     psat: false,
     notes: {
-      grade11: 'Excellent final chance before summer break.',
+      grade10:
+        'Most students find that performance for the SAT peaks in Junior & Senior year. Therefore, Sophomores can take the SAT with less pressure and get a head start in prep.',
+      grade11: 'Prime testing window for Juniors, after finishing core concepts in school.',
     },
   },
   {
@@ -156,15 +173,47 @@ export const SCHOOL_YEAR_MONTHS: MonthData[] = [
   },
 ];
 
-export function getCalendarYear(month: string, startYear: number): number {
-  const fallMonths = ['August', 'September', 'October', 'November', 'December'];
-  return fallMonths.includes(month) ? startYear : startYear + 1;
+// Calendar month order (January = 0).
+export const MONTHS_JAN_BASED: readonly string[] = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
+const MONTH_DATA_BY_NAME: Map<string, MonthData> = new Map(SCHOOL_YEAR_MONTHS.map((m) => [m.month, m]));
+
+export function getMonthData(name: string): MonthData | undefined {
+  return MONTH_DATA_BY_NAME.get(name);
+}
+
+// Aug–Dec → school year starts in `year`; Jan–Jul → starts in `year - 1`.
+export function getSchoolYearStartForDate(month: string, year: number): number {
+  const idx = MONTHS_JAN_BASED.indexOf(month);
+  return idx >= 7 ? year : year - 1;
+}
+
+export function getGradeForDate(month: string, year: number, gradYear: number): number {
+  return getGradeNum(getSchoolYearStartForDate(month, year), gradYear);
 }
 
 // Returns the actual grade number (e.g. 9, 10, 11, 12, 13) for a student in a given school year.
 // Values outside 10–12 are handled by getSATCategory ('too_early' or 'past').
 export function getGradeNum(schoolYearStart: number, gradYear: number): number {
   return 12 - (gradYear - (schoolYearStart + 1));
+}
+
+// Inverse of getGradeNum: given a student's grad year and current grade, returns the school-year start.
+export function getSchoolYearStartFromGrade(gradYear: number, grade: number): number {
+  return gradYear + grade - 13;
 }
 
 export function gradeNumToKey(gradeNum: number): GradeKey | null {
