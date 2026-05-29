@@ -75,8 +75,8 @@ function getPrepMonths(testMonth: string, testYear: number) {
 }
 
 function cardClass(isSelected: boolean, isClickable: boolean): string {
-  if (isSelected) return 'bg-emerald-500 text-white border-2 border-emerald-500 shadow-md cursor-pointer';
-  if (isClickable) return 'border-2 border-emerald-500/30 text-foreground cursor-pointer hover:border-emerald-500/70 hover:bg-emerald-500/5';
+  if (isSelected) return 'bg-primary text-on-primary border-2 border-primary shadow-md cursor-pointer';
+  if (isClickable) return 'border-2 border-primary/30 text-foreground cursor-pointer hover:border-primary/70 hover:bg-primary/5';
   return 'border border-border/20 text-muted/40';
 }
 
@@ -128,41 +128,50 @@ export default function TestTimeline() {
 
   return (
     <div className="w-full">
-      {/* Grad year selector */}
-      <div className="mb-8 flex justify-center">
-        <div className="inline-flex flex-col items-center gap-3 px-6 py-4 rounded-2xl border border-border/40 bg-surface-elevated/50">
-          <span className="text-sm font-semibold text-muted/70 uppercase tracking-widest">
-            I graduate in
+      {/* Per-grad-year panel */}
+      <div className="mt-10 p-5 md:p-6 rounded-2xl border border-primary/30 bg-surface-elevated/50 shadow-sm">
+        {/* Class-of pill tabs docked at top */}
+        <div className="-mt-18 md:-mt-22 mb-4 flex flex-col items-center gap-1.5">
+          <span className="text-sm md:text-lg font-semibold text-muted/70 uppercase tracking-widest">
+            Class of
           </span>
-          <div className="flex flex-nowrap justify-center gap-1.5 sm:gap-2">
-            {GRAD_YEAR_OPTIONS.map(({ year }) => (
-              <button
-                key={year}
-                onClick={() => handleGradYearChange(year)}
-                className={`px-2.5 py-1 sm:px-3 md:px-4 md:py-1.5 rounded-full font-bold text-base sm:text-xl md:text-2xl whitespace-nowrap transition-all duration-200 cursor-pointer ${
-                  gradYear === year
-                    ? 'bg-primary text-on-primary shadow-md'
-                    : 'border border-border text-muted/60 hover:border-primary/50 hover:text-muted'
-                }`}
-              >
-                {year}
-              </button>
-            ))}
+          <div
+            className="flex flex-nowrap gap-1.5 sm:gap-2 p-1 rounded-full bg-surface-elevated border border-primary/30 shadow-sm"
+            role="tablist"
+            aria-label="Graduation year"
+          >
+            {GRAD_YEAR_OPTIONS.map(({ year }) => {
+              const isActive = gradYear === year;
+              return (
+                <button
+                  key={year}
+                  role="tab"
+                  aria-selected={isActive}
+                  onClick={() => handleGradYearChange(year)}
+                  className={`px-4 sm:px-6 py-2 rounded-full text-base md:text-xl font-bold whitespace-nowrap transition-all duration-200 cursor-pointer ${
+                    isActive
+                      ? 'bg-primary text-on-primary shadow'
+                      : 'text-muted/60 hover:text-foreground'
+                  }`}
+                >
+                  {year}
+                </button>
+              );
+            })}
           </div>
         </div>
-      </div>
-
-      {/* Grade label + copy */}
-      <div className="mb-8">
-        <p className="text-xs font-semibold text-primary/70 uppercase tracking-widest mb-2">
-          {gradeLabel} in {yearRangeLabel}
+        <p className="text-center text-md text-muted/70 mb-10">
+          You're in <span className="font-semibold text-foreground">{gradeLabel.toLowerCase()}</span> in the {yearRangeLabel} school year.
         </p>
-        <p className="text-base text-muted leading-relaxed">{GRADE_COPY[currentGrade]}</p>
-      </div>
+
+        {/* Grade copy */}
+        <div className="mb-8">
+          <p className="text-base text-muted leading-relaxed">{GRADE_COPY[currentGrade]}</p>
+        </div>
 
       {/* SAT month cards (selection) */}
       <div className="mb-6">
-        <p className="text-sm font-semibold text-foreground mb-3">Upcoming Test Dates</p>
+        <p className="text-base font-semibold text-foreground mb-3">Upcoming Test Dates</p>
         <div className="grid grid-cols-4 md:grid-cols-8 gap-2">
           {satCards.map((card) => {
             const isSelected =
@@ -174,11 +183,11 @@ export default function TestTimeline() {
                 onClick={() => handleCardClick(card.month, card.year, card.flair, card.isPastSenior)}
                 className={`relative h-16 rounded-lg flex flex-col items-center justify-center transition-all select-none ${cardClass(isSelected, card.isClickable)}`}
               >
-                <span className="text-xs font-bold leading-none">{card.shortMonth.toUpperCase()}</span>
-                <span className="text-[10px] opacity-60 leading-none mt-1">{card.year}</span>
+                <span className="text-sm font-bold leading-none">{card.shortMonth.toUpperCase()}</span>
+                <span className="text-sm leading-none mt-1">{card.year}</span>
                 {card.flair && card.isClickable && (
                   <span
-                    className={`absolute -top-2.5 -right-2.5 text-xs font-bold leading-none px-2.5 py-1.5 rounded-full text-white ${
+                    className={`absolute -top-2.5 -right-2.5 text-sm font-bold leading-none px-2.5 py-1.5 rounded-full text-white ${
                       card.flair === 'ed_deadline' ? 'bg-amber-700' : 'bg-rose-700'
                     }`}
                   >
@@ -193,7 +202,7 @@ export default function TestTimeline() {
 
       {/* Result view: unified detail panel */}
       {selectedTest && (
-        <div className="mt-6 p-5 rounded-xl border border-border/30 bg-surface-elevated">
+        <div className="mt-6 p-5 rounded-xl bg-primary/5 border border-primary/20">
           <h3 className="text-2xl md:text-3xl font-bold text-foreground leading-tight mb-3">
             {selectedTest.month} {selectedTest.year}
           </h3>
@@ -210,7 +219,7 @@ export default function TestTimeline() {
           </p>
           {selectedTest.flair && !selectedTest.isPastSenior && (
             <p
-              className={`mt-3 text-sm leading-relaxed italic ${
+              className={`mt-3 text-base leading-relaxed italic ${
                 selectedTest.flair === 'ed_deadline'
                   ? 'text-amber-700 dark:text-amber-300'
                   : 'text-rose-700 dark:text-rose-300'
@@ -220,14 +229,15 @@ export default function TestTimeline() {
             </p>
           )}
           {selectedNote && (
-            <p className="mt-3 text-sm text-muted/80 leading-relaxed italic">
+            <p className="mt-3 text-base text-muted/80 leading-relaxed italic">
               {selectedNote}
             </p>
           )}
         </div>
       )}
+      </div>
 
-        <p className="mt-4 text-sm text-muted/60">
+        <p className="mt-4 text-base text-muted/60">
           Exact test dates vary year to year.{' '}
           <a
             href="https://satsuite.collegeboard.org/sat/dates-deadlines"
